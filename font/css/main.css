@@ -1,0 +1,12 @@
+:root {
+  --font-sans: Arial, Calibri, 'Open Sans', Roboto, sans-serif;
+  --font-serif: 'Times New Roman', Georgia, serif;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+.heading-serif {
+  font-family: var(--font-serif);
+}
