@@ -1,0 +1,22 @@
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: var(--size-border-radius-full);
+  background: var(--scrollbar-thumb);
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+*:hover::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-hover);
+}
