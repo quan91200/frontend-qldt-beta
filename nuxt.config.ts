@@ -28,4 +28,10 @@ export default defineNuxtConfig({
     '@nuxt/test-utils',
     '@nuxt/ui'
   ],
+
+  css: [
+    '~/assets/css/main.css',
+    '~/assets/css/variables.css',
+    '~/assets/css/default.css',
+  ]
 })
