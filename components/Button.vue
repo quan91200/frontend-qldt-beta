@@ -320,4 +320,5 @@ export default defineComponent({
   padding-block: var(--size-space-small);
   font-size: var(--font-size-body-small);
 }
+
 </style>
