@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="page">z``
+  <div class="page">
     <!-- Header -->
     <header class="header">
       <h1 class="title">
