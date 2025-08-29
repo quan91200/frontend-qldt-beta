@@ -1,5 +1,10 @@
 <script>
 import Button from '@/components/Button.vue'
+export default {
+  components: {
+    Button,
+  },
+}
 </script>
 
 <template>
@@ -63,16 +68,29 @@ import Button from '@/components/Button.vue'
         <h2 class="heading">
           Nút bấm mẫu
         </h2>
-        <Button variant="primary" size="medium">
+        <Button 
+          variant="primary" 
+          size="medium"
+          >
           Nút Bấm
         </Button>
-        <Button variant="secondary" size="medium">
+        <Button 
+          variant="secondary" 
+          size="medium"
+          >
           Nút Bấm
         </Button>
-        <Button variant="danger" size="medium" loading>
+        <Button 
+          variant="danger" 
+          size="medium" 
+          loading
+          >
           Nút Bấm
         </Button>
-        <Button variant="outline-danger" size="medium">
+        <Button 
+          variant="outline-danger" 
+          size="medium"
+          >
           Nút Bấm
         </Button>
       </section>
