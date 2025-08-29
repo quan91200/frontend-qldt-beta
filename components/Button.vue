@@ -18,7 +18,7 @@ export default defineComponent({
     type: {
       type: String,
       default: 'submit',
-      validator: value => [
+      validate: value => [
         'submit',
         'button',
         'reset',
