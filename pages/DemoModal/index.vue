@@ -5,12 +5,14 @@ import {
 } from "vue"
 
 import Modal from "~/components/Modal.vue"
+import Button from "~/components/Button.vue"
 
 export default defineComponent({
   name: "DemoModal",
 
   components: {
     Modal,
+    Button,
   },
 
   setup() {
@@ -36,11 +38,12 @@ export default defineComponent({
 
 <template>
   <div class="page">
-    <button
+    <Button
+      variant="primary"
       @click="openModal"
     >
       Mở Modal
-    </button>
+    </Button>
 
     <Modal
       :isVisible="isVisible"
@@ -55,11 +58,12 @@ export default defineComponent({
       </template>
 
       <template #footer>
-        <button
+        <Button
+          variant="danger"
           @click="closeModal"
         >
           Xác nhận
-        </button>
+        </Button>
       </template>
     </Modal>
   </div>
