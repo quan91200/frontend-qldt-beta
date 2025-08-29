@@ -232,7 +232,7 @@ export default defineComponent({
 }
 
 .unit-modal > .content > .unit-header > .close-icon:hover {
-  border-radius: var(----size-border-radius-full);
+  border-radius: var(--size-border-radius-full);
   color: var(--color-zinc-500);
 }
 
