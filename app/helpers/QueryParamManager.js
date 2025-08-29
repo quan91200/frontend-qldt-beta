@@ -34,13 +34,29 @@ export class QueryParamManager {
   }
 
   /**
+   * Validate query key
+   * @param {string} key
+   * @returns {boolean}
+   */
+  isValidKey(key) {
+    if (typeof key !== 'string') return false
+
+    if (key.length === 0) return false
+
+    return true
+  }
+
+  /**
    * Get a query parameter by key.
    *
    * @param {string} [key]
    * @param {any} [defaultValue=null] - Default value if not found.
    * @returns {string|undefined}
    */
-  getParam(key = this.key, defaultValue = null) {
+  getParam(
+    key = this.key,
+    defaultValue = null
+  ) {
     const route = useRoute()
     return route.query[key] ?? defaultValue
   }
@@ -52,6 +68,8 @@ export class QueryParamManager {
    * @param {string|number} value
    */
   setParam(key = this.key, value) {
+    if (!this.isValidKey(key)) return
+
     const route = useRoute()
     const router = useRouter()
 
@@ -64,17 +82,23 @@ export class QueryParamManager {
   }
 
   /**
-   * Remove a query parameter from URL.
-   *
-   * @param {string} [key]
-   */
+  * Remove a query parameter from URL.
+  *
+  * @param {string} [key]
+  */
   removeParam(key = this.key) {
+    if (!this.isValidKey(key)) return
+
     const route = useRoute()
     const router = useRouter()
 
     const query = {
       ...route.query
     }
+    if (!(key in query)) {
+      return
+    }
+
     delete query[key]
 
     router.push({
