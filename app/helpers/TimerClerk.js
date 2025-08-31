@@ -10,7 +10,7 @@ export default class TimerClerk {
    *   timeInMilliseconds: number
    * }} params
    */
-  cunstructor({
+  constructor({
     callback,
     timeInMilliseconds,
   }) {
@@ -46,7 +46,7 @@ export default class TimerClerk {
   /**
    * Reset timer and schedule new callback
    *
-   * @param {...array} args
+   * @param {...any} args
    */
   run(...args) {
     this.cancel()
