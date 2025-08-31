@@ -21,10 +21,13 @@ export function useDebounce({
 
   const timerClerk = TimerClerk.create({
     callback: (...args) => {
-      if (!immediate) {
-        callback(...args)
-      }
+      // Always run callback for trailing edge
+      callback(...args)
+
+      // Reset so that future calls can run immediately again
+      called = false
     },
+
     timeInMilliseconds: timeInMs,
   })
 
@@ -36,11 +39,13 @@ export function useDebounce({
    * @param {...any} args - Arguments passed to the original callback.
    * @returns {void}
    */
-  function run(...args) {
+  const run = (...args) => {
     if (immediate && !called) {
       callback(...args)
+
       called = true
     }
+
     timerClerk.run(...args)
   }
 
@@ -51,8 +56,9 @@ export function useDebounce({
    *
    * @returns {void}
    */
-  function cancel() {
+  const cancel = () => {
     timerClerk.cancel()
+
     called = false
   }
 
