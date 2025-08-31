@@ -68,7 +68,7 @@ export default function useDropdown(props) {
    *
    * @returns {Promise<void>}
    */
-  async function calculatePosition() {
+  const calculatePosition = async () => {
     if (!dropdownRef.value || !contentRef.value) return
 
     await nextTick()
@@ -80,36 +80,34 @@ export default function useDropdown(props) {
     const viewportWidth = window.innerWidth
     const viewportHeight = window.innerHeight
 
-    // Horizontal
-    if (dropdownPosition.value === 'auto') {
+    // ---- Horizontal ----
+    if (dropdownPosition.value !== 'auto') {
+      calculatedPos.value = dropdownPosition.value
+    } else {
       const spaceRight = viewportWidth - dropdownRect.right
       const spaceLeft = dropdownRect.left
 
-      if (spaceRight >= contentRect.width) {
-        calculatedPos.value = 'left'
-      } else if (spaceLeft >= contentRect.width) {
-        calculatedPos.value = 'right'
-      } else {
-        calculatedPos.value = 'left' // fallback
-      }
-    } else {
-      calculatedPos.value = dropdownPosition.value
+      calculatedPos.value =
+        spaceRight >= contentRect.width
+          ? 'left'
+          : spaceLeft >= contentRect.width
+            ? 'right'
+            : 'left' // fallback
     }
 
-    // Vertical
-    if (verticalPosition.value === 'auto') {
+    // ---- Vertical ----
+    if (verticalPosition.value !== 'auto') {
+      calculatedVertPos.value = verticalPosition.value
+    } else {
       const spaceBottom = viewportHeight - dropdownRect.bottom
       const spaceTop = dropdownRect.top
 
-      if (spaceBottom >= contentRect.height) {
-        calculatedVertPos.value = 'bottom'
-      } else if (spaceTop >= contentRect.height) {
-        calculatedVertPos.value = 'top'
-      } else {
-        calculatedVertPos.value = 'bottom' // fallback
-      }
-    } else {
-      calculatedVertPos.value = verticalPosition.value
+      calculatedVertPos.value =
+        spaceBottom >= contentRect.height
+          ? 'bottom'
+          : spaceTop >= contentRect.height
+            ? 'top'
+            : 'bottom' // fallback
     }
   }
 
@@ -136,7 +134,16 @@ export default function useDropdown(props) {
   const onClickOutside = (e) => {
     if (!isOpen.value) return
 
-    if (dropdownRef.value && !dropdownRef.value.contains(e.target)) {
+    const target = e.target
+    const dropdownEl = dropdownRef.value
+    const contentEl = contentRef.value
+
+    if (
+      dropdownEl &&
+      !dropdownEl.contains(target) &&
+      contentEl &&
+      !contentEl.contains(target)
+    ) {
       isOpen.value = false
     }
   }
@@ -145,13 +152,13 @@ export default function useDropdown(props) {
   onMounted(() => {
     document.addEventListener('click', onClickOutside)
     window.addEventListener('resize', debouncedCalculatePosition)
-    window.addEventListener('scroll', debouncedCalculatePosition)
+    window.addEventListener('scroll', debouncedCalculatePosition, { passive: true })
   })
 
   onUnmounted(() => {
     document.removeEventListener('click', onClickOutside)
     window.removeEventListener('resize', debouncedCalculatePosition)
-    window.removeEventListener('scroll', debouncedCalculatePosition)
+    window.removeEventListener('scroll', debouncedCalculatePosition, { passive: true })
     cancelDebounce()
   })
 
@@ -183,6 +190,8 @@ export default function useDropdown(props) {
    * @returns {void}
    */
   const toggle = () => {
+    if (props.disabled) return
+
     isOpen.value = !isOpen.value
   }
 
@@ -192,6 +201,8 @@ export default function useDropdown(props) {
    * @returns {void}
    */
   const open = () => {
+    if (props.disabled) return
+
     isOpen.value = true
   }
 
@@ -201,6 +212,8 @@ export default function useDropdown(props) {
    * @returns {void}
    */
   const close = () => {
+    if (props.disabled) return
+
     isOpen.value = false
   }
 
