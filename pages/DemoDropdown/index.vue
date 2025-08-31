@@ -18,7 +18,7 @@ export default defineComponent({
     <section class="demo-section">
       <h2>Basic Dropdown</h2>
       <BaseDropdownComponent>
-        <template #trigger="{ isOpen = !isOpen }">
+        <template #trigger="{ isOpen }">
           <Button variant="primary">
             Menu
           </Button>
@@ -26,19 +26,19 @@ export default defineComponent({
 
         <template #content>
           <div
-            onclick="location.href='http://localhost:3000/DemoModal'"
+            @click="$router.push('/DemoModal')"
             class="dropdown__item"
           >
             DemoModal
           </div>
           <div
-            onclick="location.href='#'"
+            @click="$router.push('/')"
             class="dropdown__item"
           >
-            Action 2
+            Home
           </div>
           <div
-            onclick="location.href='#'"
+            @click="$router.push('#')"
             class="dropdown__item"
           >
             Action 3
