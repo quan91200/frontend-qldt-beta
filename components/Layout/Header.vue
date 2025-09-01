@@ -83,7 +83,7 @@ export default defineComponent({
   justify-content: space-between;
   height: 100%;
   padding: 0 var(--size-space-large);
-  max-width: auto;
+  width: 100%;
   margin: 0 var(--size-space-large);
 }
 
