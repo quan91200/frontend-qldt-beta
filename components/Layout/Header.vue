@@ -4,18 +4,12 @@ import {
 } from "vue"
 
 import Dropdown from "~/components/Dropdown.vue"
-import Button from "~/components/Button.vue"
 
 export default defineComponent({
   name: "Header",
+
   components: {
-    Dropdown,
-    Button
-  },
-  methods: {
-    logout() {
-      alert("Logging out...") // thay bằng logic logout thật
-    },
+    Dropdown
   },
 })
 </script>
@@ -34,10 +28,16 @@ export default defineComponent({
           <template #trigger="{ isOpen }">
             <div class="user-profile">
               <div class="profile-avatar">
-                <span>U</span>
+                <span>
+                  U
+                </span>
               </div>
-              <span class="profile-name">User</span>
-              <span class="dropdown-arrow">▼</span>
+              <span class="profile-name">
+                User
+              </span>
+              <span class="dropdown-arrow">
+                ▼
+              </span>
             </div>
           </template>
           <template #content="{ close }">
@@ -48,8 +48,13 @@ export default defineComponent({
               <div class="dropdown-item">
                 <span>Settings</span>
               </div>
-              <div class="dropdown-item" @click="logout(); close()">
-                <span>Logout</span>
+              <div
+                class="dropdown-item"
+                @click="close()"
+              >
+                <span>
+                  Logout
+                </span>
               </div>
             </div>
           </template>
