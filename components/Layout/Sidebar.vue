@@ -21,102 +21,21 @@ export default defineComponent({
         href: '/',
       },
       {
-        label: 'Profile',
+        label: 'Demo',
         separator: true,
-        iconName: 'ph:user-list',
+        iconName: 'ph:monitor',
       },
       {
-        label: 'Tự nhập hồ sơ',
-        href: '/tunhaphoso',
+        label: 'Button',
+        href: '/DemoButton',
       },
       {
-        label: 'Xin xác nhận',
-        href: '/xinxacnhan',
+        label: 'Dropdown',
+        href: '/DemoDropdown',
       },
       {
-        label: 'Góc học tập',
-        separator: true,
-        iconName: 'ph:newspaper-clipping',
-      },
-      {
-        label: 'Tra cứu điểm',
-        href: '/tracuudiem'
-      },
-      {
-        label: 'Chương trình học',
-        href: '/chuongtrinhhoc'
-      },
-      {
-        label: 'Đăng ký công nhận điểm',
-        href: '/dangkycongnhandiem'
-      },
-      {
-        label: 'Đăng ký xin phúc khảo',
-        href: '/dangkyxinphuckhao'
-      },
-      {
-        label: 'Xét tốt nghiệp',
-        href: '/xettotnghiep'
-      },
-      {
-        label: 'Đăng ký trực tuyến',
-        separator: true,
-        iconName: 'ph:user-circle-dashed',
-      },
-      {
-        label: 'Đăng ký học',
-        href: '/dangkyhoc'
-      },
-      {
-        label: 'Đăng ký nguyện vọng',
-        href: '/dangkynguyenvong'
-      },
-      {
-        label: 'Tra cứu kết quả đăng ký',
-        href: '/tracuuketquadangky'
-      },
-      {
-        label: 'Đăng ký thi',
-        href: '/dangkythi'
-      },
-      {
-        label: 'Thời khóa biểu',
-        separator: true,
-        iconName: 'ph:calendar-dots',
-      },
-       {
-        label: 'Lịch học',
-        href: '/lichhoc'
-      },
-       {
-        label: 'Lịch thi',
-        href: '/lichthi'
-      },
-      {
-        label: 'Tài chính',
-        separator: true,
-        iconName: 'ph:currency-circle-dollar',
-      },
-       {
-        label: 'Học phí',
-        href: '/hocphi'
-      },
-       {
-        label: 'Thanh toán học phí',
-        href: '/thanhtoanhocphi'
-      },
-       {
-        label: 'Bảng quyết toán cá nhân',
-        href: '/quyettoan'
-      },
-      {
-        label: 'Văn bản',
-        separator: true,
-        iconName: 'ph:files',
-      },
-       {
-        label: 'Văn bản, quy định, biểu mẫu',
-        href: '/vanban'
+        label: 'Modal',
+        href: '/DemoModal'
       },
     ]
 
