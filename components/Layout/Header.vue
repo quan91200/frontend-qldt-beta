@@ -3,53 +3,60 @@ import {
   defineComponent
 } from "vue"
 
+import {
+  Icon,
+} from "#components"
+
 import Dropdown from "~/components/Dropdown.vue"
 
 export default defineComponent({
   name: "Header",
 
   components: {
-    Dropdown
+    Dropdown,
+    Icon
   },
 })
 </script>
 
 <template>
-  <header class="header">
-    <div class="header-container">
+  <header class="unit-header">
+    <div class="unit-header-container">
       <!-- Left: Logo -->
-      <div class="header-logo">
+      <div class="unit-logo">
         <h1>QLDT</h1>
       </div>
       <!-- Right: User actions -->
-      <div class="header-actions">
+      <div class="unit-header-actions">
         <!-- User profile dropdown -->
         <Dropdown dropdownPosition="right">
           <template #trigger="{ isOpen }">
-            <div class="user-profile">
-              <div class="profile-avatar">
+            <div class="unit-user-profile">
+              <div class="unit-profile-avatar">
                 <span>
                   U
                 </span>
               </div>
-              <span class="profile-name">
+              <span class="unit-profile-name">
                 User
               </span>
-              <span class="dropdown-arrow">
-                ▼
-              </span>
+              <Icon
+                name="mdi:chevron-down"
+                class="unit-dropdown-arrow"
+                :class="{ 'rotate-180': isOpen }"
+              />
             </div>
           </template>
           <template #content="{ close }">
-            <div class="user-dropdown-content">
-              <div class="dropdown-item">
+            <div class="unit-user-dropdown-content">
+              <div class="unit-dropdown-item">
                 <span>Profile</span>
               </div>
-              <div class="dropdown-item">
+              <div class="unit-dropdown-item">
                 <span>Settings</span>
               </div>
               <div
-                class="dropdown-item"
+                class="unit-dropdown-item"
                 @click="close()"
               >
                 <span>
@@ -65,7 +72,7 @@ export default defineComponent({
 </template>
 
 <style scoped>
-.header {
+.unit-header {
   width: 100%;
   height: calc(var(--size-header-height) * 1.3); /* Increased header height by 30% */
   background-color: var(--color-white, #ffffff);
@@ -77,7 +84,7 @@ export default defineComponent({
   z-index: 300;
 }
 
-.header-container {
+.unit-header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -87,7 +94,7 @@ export default defineComponent({
   margin: 0 var(--size-space-large);
 }
 
-.header-logo h1 {
+.unit-logo > h1 {
   font-size: var(--font-size-heading-large);
   font-weight: var(--font-weight-bold);
   color: var(--color-blue-700);
@@ -95,13 +102,13 @@ export default defineComponent({
 }
 
 /* Navigation */
-.header-navigation {
+.unit-header-navigation {
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.nav-list {
+.unit-header-navigation > .nav-list {
   display: flex;
   list-style: none;
   margin: 0;
@@ -109,11 +116,11 @@ export default defineComponent({
   gap: var(--size-space-xx-large);
 }
 
-.nav-item {
+.nav-list > .nav-item {
   position: relative;
 }
 
-.nav-link {
+.nav-item > .nav-link {
   text-decoration: none;
   color: var(--color-slate-700);
   font-size: var(--font-size-body-medium);
@@ -146,7 +153,7 @@ export default defineComponent({
 /* Search box styles removed */
 
 /* User profile */
-.user-profile {
+.unit-user-profile {
   display: flex;
   align-items: center;
   gap: var(--size-space-medium);
@@ -156,11 +163,11 @@ export default defineComponent({
   transition: background-color 0.2s ease;
 }
 
-.user-profile:hover {
+.unit-user-profile:hover {
   background-color: var(--color-gray-100);
 }
 
-.profile-avatar {
+.unit-user-profile > .unit-profile-avatar {
   width: var(--size-avatar-md);
   height: var(--size-avatar-md);
   border-radius: 50%;
@@ -173,25 +180,25 @@ export default defineComponent({
   font-weight: var(--font-weight-bold);
 }
 
-.profile-name {
+.unit-user-profile > .unit-profile-name {
   font-size: var(--font-size-body-medium);
   font-weight: var(--font-weight-medium);
   color: var(--color-slate-800);
 }
 
-.dropdown-arrow {
-  font-size: var(--font-size-xs);
+.unit-user-profile > .unit-dropdown-arrow {
+  font-size: var(--font-size-xl);
   color: var(--color-gray-500);
   margin-left: var(--size-space-tiny);
   transition: transform 0.2s ease;
 }
 
-.user-profile:hover .dropdown-arrow {
+.unit-user-profile:hover > .unit-dropdown-arrow {
   color: var(--color-slate-700);
 }
 
 /* Dropdown content */
-.user-dropdown-content {
+.unit-user-dropdown-content {
   min-width: 180px;
   background-color: white;
   border-radius: var(--size-border-radius);
@@ -199,17 +206,21 @@ export default defineComponent({
   overflow: hidden;
 }
 
-.dropdown-item {
+.unit-user-dropdown-content > .unit-dropdown-item {
   padding: var(--size-space-medium) var(--size-space-large);
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-.dropdown-item:hover {
+.unit-user-dropdown-content > .unit-dropdown-item:hover {
   background-color: var(--color-gray-100);
 }
 
-.dropdown-item:not(:last-child) {
+.unit-user-dropdown-content > .unit-dropdown-item:not(:last-child) {
   border-bottom: 1px solid var(--color-gray-200);
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
 }
 </style>
