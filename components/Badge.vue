@@ -3,7 +3,7 @@ import {
   defineComponent,
 } from 'vue'
 
-import BadgeContext from '~/app/context/components/BadgeContext'
+import BadgeContext from '~/app/context/BadgeContext'
 
 export default defineComponent({
   name: 'Badge',
