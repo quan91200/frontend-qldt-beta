@@ -29,9 +29,8 @@ export default {
 
 <style>
 .unit-container {
-
   color: var(--color-zinc-900);
-  background-color: var(--color-zinc-50);
+  background-color: var(--color-gray-50);
 }
 </style>
 
