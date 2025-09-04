@@ -156,7 +156,7 @@ export default defineComponent({
 .unit-user-dropdown-content > .unit-dropdown-item {
   padding-inline: var(--size-space-medium);
   padding-block: var(--size-space-medium);
-  
+
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
