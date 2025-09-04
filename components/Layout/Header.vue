@@ -75,7 +75,6 @@ export default defineComponent({
 .unit-header {
   width: 100%;
   height: var(--size-header-height);
-  background-color: var(--color-gray-50);
   position: sticky;
 }
 
