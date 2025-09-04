@@ -39,7 +39,7 @@ export default defineComponent({
         return {
             label: formatLabel(decodeURIComponent(segment)),
             path: "/" + parts.slice(0, index + 1).join("/"),
-    }
+        }
       })
     })
 
