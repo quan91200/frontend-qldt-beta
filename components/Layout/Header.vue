@@ -79,12 +79,13 @@ export default defineComponent({
 }
 
 .unit-header > .unit-header-container {
+  padding-inline: var(--size-space-large);
+
+  height: var(--size-header-height);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  height: var(--size-header-height);
-  padding-inline: var(--size-space-large);
 }
 
 .unit-header > .unit-header-container > .unit-logo > h1 {
@@ -93,13 +94,12 @@ export default defineComponent({
   color: var(--color-blue-500);
 }
 
-.unit-header > .unit-header-container > .unit-header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--size-space-large);
-}
-
 .unit-user-profile {
+  border-radius: var(--size-border-radius);
+
+  padding-inline: var(--size-space-medium);
+  padding-block: var(--size-space-tiny);
+
   display: flex;
   align-items: center;
   gap: var(--size-space-medium);
@@ -107,8 +107,8 @@ export default defineComponent({
   transition: background-color 0.2s ease;
 }
 
-.unit-header > .unit-header-container > .unit-header-actions > .unit-user-profile:hover {
-  background-color: var(--color-gray-100);
+.unit-user-profile:hover {
+  background-color: var(--color-gray-200);
 }
 
 .unit-user-profile > .unit-profile-avatar {
@@ -133,22 +133,21 @@ export default defineComponent({
   color: var(--color-slate-800);
 }
 
-.unit-header > .unit-header-container > .unit-header-actions > .unit-user-profile > .unit-dropdown-arrow {
+.unit-user-profile > .unit-dropdown-arrow {
+  padding-inline: var(--size-space-medium);
+
   font-size: var(--font-size-xl);
   color: var(--color-gray-500);
-  padding-inline: var(--size-space-medium);
+
   transition: transform 0.2s ease;
 }
 
-.unit-header > .unit-header-container > .unit-header-actions > .unit-user-profile:hover > .unit-dropdown-arrow {
+.unit-user-profile:hover > .unit-dropdown-arrow {
   color: var(--color-slate-700);
 }
 
-.unit-header > .unit-header-container > .unit-header-actions > .unit-user-dropdown-content {
+.unit-user-dropdown-content {
   min-width: 180px;
-  background-color: var(--color-teal-50);
-  border-radius: var(--size-border-radius);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
@@ -157,6 +156,7 @@ export default defineComponent({
   padding-block: var(--size-space-medium);
 
   cursor: pointer;
+
   transition: background-color 0.2s ease;
 }
 
