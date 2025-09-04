@@ -83,6 +83,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   height: var(--size-header-height);
   padding-inline: var(--size-space-large);
 }
@@ -103,6 +104,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   gap: var(--size-space-medium);
+
   transition: background-color 0.2s ease;
 }
 
@@ -113,11 +115,14 @@ export default defineComponent({
 .unit-user-profile > .unit-profile-avatar {
   width: var(--size-avatar-md);
   height: var(--size-avatar-md);
+
   border-radius: var(--size-border-radius-full);
   background: var(--avatar-linear-gradient);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   color: var(--color-teal-50);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
@@ -132,7 +137,7 @@ export default defineComponent({
 .unit-header > .unit-header-container > .unit-header-actions > .unit-user-profile > .unit-dropdown-arrow {
   font-size: var(--font-size-xl);
   color: var(--color-gray-500);
-  margin-left: var(--size-space-tiny);
+  padding-inline: var(--size-space-medium);
   transition: transform 0.2s ease;
 }
 
@@ -151,6 +156,7 @@ export default defineComponent({
 .unit-user-dropdown-content > .unit-dropdown-item {
   padding-inline: var(--size-space-medium);
   padding-block: var(--size-space-medium);
+  
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
