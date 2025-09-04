@@ -15,7 +15,10 @@ import {
 
 export default defineComponent({
   name: "Breadcrumb",
-  components: { Icon },
+
+  components: {
+    Icon
+  },
 
   props: {
     disabledSegments: {
