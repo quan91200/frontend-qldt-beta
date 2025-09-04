@@ -74,7 +74,7 @@ export default defineComponent({
 <style scoped>
 .unit-header {
   width: 100%;
-  height: var(--size-header-height); /* Increased header height by 30% */
+  height: var(--size-header-height);
   background-color: var(--color-gray-50);
   position: sticky;
 }
@@ -84,7 +84,7 @@ export default defineComponent({
   align-items: center;
   justify-content: space-between;
   height: var(--size-header-height);
-  padding: 0 var(--size-space-large);
+  padding-inline: var(--size-space-large);
 }
 
 .unit-header > .unit-header-container > .unit-logo > h1 {
@@ -93,15 +93,13 @@ export default defineComponent({
   color: var(--color-blue-500);
 }
 
-/* Header actions */
 .unit-header > .unit-header-container > .unit-header-actions {
   display: flex;
   align-items: center;
   gap: var(--size-space-large);
 }
 
-/* User profile */
-.unit-user-profile { /* lỗi đoạn này */
+.unit-user-profile {
   display: flex;
   align-items: center;
   gap: var(--size-space-medium);
@@ -142,7 +140,6 @@ export default defineComponent({
   color: var(--color-slate-700);
 }
 
-/* Dropdown content */
 .unit-header > .unit-header-container > .unit-header-actions > .unit-user-dropdown-content {
   min-width: 180px;
   background-color: var(--color-teal-50);
@@ -150,8 +147,10 @@ export default defineComponent({
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
+
 .unit-user-dropdown-content > .unit-dropdown-item {
-  padding: var(--size-space-medium) var(--size-space-large);
+  padding-inline: var(--size-space-medium);
+  padding-block: var(--size-space-medium);
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
