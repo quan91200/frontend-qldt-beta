@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-  <div class="unit-container">
+  <div class="unit-default-container">
     <Header />
 
     <div class="unit-content">
@@ -28,10 +28,9 @@ export default {
 </template>
 
 <style>
-.unit-container {
-
+.unit-default-container {
   color: var(--color-zinc-900);
-  background-color: var(--color-zinc-50);
+  background-color: var(--color-gray-50);
 }
 </style>
 
