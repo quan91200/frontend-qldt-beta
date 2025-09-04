@@ -8,12 +8,14 @@ import {
 } from "#components"
 
 import Dropdown from "~/components/Dropdown.vue"
+import Badge from '~/components/Badge.vue'
 
 export default defineComponent({
   name: "Header",
 
   components: {
     Dropdown,
+    Badge,
     Icon
   },
 })
@@ -24,7 +26,14 @@ export default defineComponent({
     <div class="unit-header-container">
       <!-- Left: Logo -->
       <div class="unit-logo">
-        <h1>QLDT</h1>
+        <Badge
+          color="danger"
+          content="beta"
+        >
+          <span class="logo">
+            QLDT
+          </span>
+        </Badge>
       </div>
       <!-- Right: User actions -->
       <div class="unit-header-actions">
@@ -88,7 +97,7 @@ export default defineComponent({
   justify-content: space-between;
 }
 
-.unit-header > .unit-header-container > .unit-logo > h1 {
+.logo {
   font-size: var(--font-size-heading-large);
   font-weight: var(--font-weight-bold);
   color: var(--color-blue-500);
