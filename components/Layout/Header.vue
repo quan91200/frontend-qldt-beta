@@ -83,56 +83,14 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
+  height: var(--size-header-height);
   padding: 0 var(--size-space-large);
-  width: 100%;
 }
 
 .unit-header > .unit-header-container > .unit-logo > h1 {
   font-size: var(--font-size-heading-large);
   font-weight: var(--font-weight-bold);
-  color: var(--color-blue-700);
-}
-
-/* Navigation */
-.unit-header > .unit-header-container > .unit-header-navigation {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.unit-header > .unit-header-container > .unit-header-navigation > .nav-list {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: var(--size-space-xx-large);
-}
-
-.unit-header > .unit-header-container > .unit-header-navigation > .nav-list > .nav-item {
-  position: relative;
-}
-
-.unit-header > .unit-header-container > .unit-header-navigation > .nav-list > .nav-item > .nav-link {
-  text-decoration: none;
-  color: var(--color-slate-700);
-  font-size: var(--font-size-body-medium);
-  font-weight: var(--font-weight-medium);
-  transition: color 0.2s ease;
-}
-
-.unit-header > .unit-header-container > .unit-header-navigation > .nav-list > .nav-item > .nav-link:hover {
-  color: var(--color-blue-600);
-}
-
-.unit-header > .unit-header-container > .unit-header-navigation > .nav-list > .nav-item > .nav-link:hover::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 100%;
-  height: 2px;
-  background-color: var(--color-blue-600);
+  color: var(--color-blue-500);
 }
 
 /* Header actions */
@@ -141,8 +99,6 @@ export default defineComponent({
   align-items: center;
   gap: var(--size-space-large);
 }
-
-/* Search box styles removed */
 
 /* User profile */
 .unit-user-profile { /* lỗi đoạn này */
@@ -156,20 +112,20 @@ export default defineComponent({
   background-color: var(--color-gray-100);
 }
 
-.unit-header .unit-header-container .unit-header-actions .unit-user-profile > .unit-profile-avatar {
+.unit-user-profile > .unit-profile-avatar {
   width: var(--size-avatar-md);
   height: var(--size-avatar-md);
-  border-radius: 50%;
+  border-radius: var(--size-border-radius-full);
   background: var(--avatar-linear-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--color-teal-50);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
 }
 
-.unit-header > .unit-header-container > .unit-header-actions > .unit-user-profile > .unit-profile-name { /* lỗi đoạn này */
+.unit-user-profile > .unit-profile-name {
   font-size: var(--font-size-body-medium);
   font-weight: var(--font-weight-medium);
   color: var(--color-slate-800);
@@ -189,7 +145,7 @@ export default defineComponent({
 /* Dropdown content */
 .unit-header > .unit-header-container > .unit-header-actions > .unit-user-dropdown-content {
   min-width: 180px;
-  background-color: --color-teal-50;
+  background-color: var(--color-teal-50);
   border-radius: var(--size-border-radius);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
