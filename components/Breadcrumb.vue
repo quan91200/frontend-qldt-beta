@@ -6,57 +6,59 @@ import {
 
 import {
     useRoute,
-    useRouter
 } from "vue-router"
 
 import {
-    Icon
+    Icon,
+    NuxtLink,
 } from "#components"
 
 export default defineComponent({
   name: "Breadcrumb",
 
   components: {
-    Icon
+    Icon,
+    NuxtLink,
   },
 
   props: {
+    /**
+     * List of breadcrumb segments that should be disabled (not clickable).
+     * @type {string[]}
+     */
     disabledSegments: {
       type: Array,
       default: () => [],
-      validator: (arr) => arr.every(item => typeof item === "string"),
     },
   },
 
   setup(props) {
     const route = useRoute()
-    const router = useRouter()
 
-    // Split path into segments
-    const segments = computed(() => {
-      const parts = route.path.split("/").filter(Boolean)
-      return parts.map((segment, index) => {
-        return {
-            label: formatLabel(decodeURIComponent(segment)),
-            path: "/" + parts.slice(0, index + 1).join("/"),
-        }
-      })
-    })
-
-    const isDisabled = (segment) => props.disabledSegments.includes(segment.label)
-
-    const navigateTo = (path) => {
-      router.push(path)
-    }
     const formatLabel = (label) => {
-        if (label.toLowerCase() === "index") return "Trang Chủ"
-        return label
-            .replace(/([a-z])([A-Z])/g, "$1 $2") // split camelCase
-            .replace(/-/g, " ")                 // split kebab-case
-            .replace(/\b\w/g, c => c.toUpperCase()) // capitalize first letter
-}
+      if (label.toLowerCase() === "index") return "Trang Chủ"
+      return label
+        .replace(/([a-z])([A-Z])/g, "$1 $2") // split camelCase
+        .replace(/-/g, " ")                 // split kebab-case
+        .replace(/\b\w/g, c => c.toUpperCase()) // capitalize first letter
+    }
 
-    return { segments, isDisabled, navigateTo, formatLabel }
+    const breadcrumb = {
+      formatLabel,
+      segments: computed(() => {
+        const parts = route.path.split("/").filter(Boolean)
+        return parts.map((segment, index) => ({
+          raw: segment,
+          label: formatLabel(decodeURIComponent(segment)),
+          path: "/" + parts.slice(0, index + 1).join("/"),
+        }))
+      }),
+      isDisabled(segment) {
+        return props.disabledSegments.includes(segment.raw)
+      },
+    }
+
+    return { breadcrumb }
   },
 })
 </script>
@@ -68,21 +70,20 @@ export default defineComponent({
   >
     <ol class="unit-breadcrumb-list">
       <li
-        v-for="(segment, index) in segments"
+        v-for="(segment, index) in breadcrumb.segments"
         :key="index"
         class="unit-breadcrumb-item"
       >
         <!-- If not last segment -->
-        <template v-if="index < segments.length - 1">
+        <template v-if="index < breadcrumb.segments.length - 1">
           <!-- Linkable if not disabled -->
-          <a
-            v-if="!isDisabled(segment)"
-            @click.prevent="navigateTo(segment.path)"
-            href="#"
+          <NuxtLink
+            v-if="!breadcrumb.isDisabled(segment)"
+            :to="segment.path"
             class="unit-breadcrumb-link"
           >
             {{ segment.label }}
-          </a>
+          </NuxtLink>
 
           <!-- Disabled segment -->
           <span
@@ -96,6 +97,7 @@ export default defineComponent({
           <Icon
             name="mdi:chevron-right"
             class="unit-breadcrumb-separator"
+            aria-hidden="true"
           />
         </template>
 
