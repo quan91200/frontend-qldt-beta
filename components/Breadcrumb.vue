@@ -1,17 +1,7 @@
 <script>
-import {
-    defineComponent,
-    computed
-} from "vue"
-
-import {
-    useRoute,
-} from "vue-router"
-
-import {
-    Icon,
-    NuxtLink,
-} from "#components"
+import { defineComponent, computed } from "vue"
+import { useRoute } from "vue-router"
+import { Icon, NuxtLink } from "#components"
 
 export default defineComponent({
   name: "Breadcrumb",
@@ -35,50 +25,59 @@ export default defineComponent({
   setup(props) {
     const route = useRoute()
 
+    /**
+     * Format a segment label into human-readable form
+     * @param {string} label
+     * @returns {string}
+     */
     const formatLabel = (label) => {
+      if (!label) return ""
       if (label.toLowerCase() === "index") return "Trang Chủ"
       return label
-        .replace(/([a-z])([A-Z])/g, "$1 $2") // split camelCase
-        .replace(/-/g, " ")                 // split kebab-case
-        .replace(/\b\w/g, c => c.toUpperCase()) // capitalize first letter
+        .replace(/([a-z])([A-Z])/g, "$1 $2")
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase())
     }
 
-    const breadcrumb = {
-      formatLabel,
-      segments: computed(() => {
-        const parts = route.path.split("/").filter(Boolean)
-        return parts.map((segment, index) => ({
-          raw: segment,
-          label: formatLabel(decodeURIComponent(segment)),
-          path: "/" + parts.slice(0, index + 1).join("/"),
-        }))
-      }),
-      isDisabled(segment) {
-        return props.disabledSegments.includes(segment.raw)
-      },
-    }
+    /**
+     * Computed breadcrumb segments
+     * @type {import("vue").ComputedRef<{label: string, path: string}[]>}
+     */
+    const segments = computed(() => {
+      const parts = route.path.split("/").filter(Boolean)
+      return parts.map((segment, index) => ({
+        label: formatLabel(decodeURIComponent(segment)),
+        path: "/" + parts.slice(0, index + 1).join("/"),
+      }))
+    })
 
-    return { breadcrumb }
+    /**
+     * Check if a segment is disabled
+     * @param {{ label: string, path: string }} segment
+     * @returns {boolean}
+     */
+    const isDisabled = (segment) =>
+      props.disabledSegments.includes(segment.label)
+
+    return { segments, isDisabled }
   },
 })
 </script>
 
+
 <template>
-  <nav
-    class="unit-breadcrumb"
-    aria-label="Breadcrumb"
-  >
+  <nav class="unit-breadcrumb" aria-label="Breadcrumb">
     <ol class="unit-breadcrumb-list">
       <li
-        v-for="(segment, index) in breadcrumb.segments"
+        v-for="(segment, index) in segments"
         :key="index"
         class="unit-breadcrumb-item"
       >
-        <!-- If not last segment -->
-        <template v-if="index < breadcrumb.segments.length - 1">
+        <!-- Not last segment -->
+        <template v-if="index < segments.length - 1">
           <!-- Linkable if not disabled -->
           <NuxtLink
-            v-if="!breadcrumb.isDisabled(segment)"
+            v-if="!isDisabled(segment)"
             :to="segment.path"
             class="unit-breadcrumb-link"
           >
@@ -86,10 +85,7 @@ export default defineComponent({
           </NuxtLink>
 
           <!-- Disabled segment -->
-          <span
-            v-else
-            class="unit-breadcrumb-disabled"
-          >
+          <span v-else class="unit-breadcrumb-disabled">
             {{ segment.label }}
           </span>
 
@@ -97,21 +93,18 @@ export default defineComponent({
           <Icon
             name="mdi:chevron-right"
             class="unit-breadcrumb-separator"
-            aria-hidden="true"
           />
         </template>
 
-        <!-- Last segment (always text) -->
-        <span
-          v-else
-          class="unit-breadcrumb-current"
-        >
+        <!-- Last segment -->
+        <span v-else class="unit-breadcrumb-current">
           {{ segment.label }}
         </span>
       </li>
     </ol>
   </nav>
 </template>
+
 
 <style scoped>
 .unit-breadcrumb {
@@ -125,8 +118,6 @@ export default defineComponent({
   gap: var(--size-space-small);
 
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .unit-breadcrumb-item {
