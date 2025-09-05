@@ -31,8 +31,6 @@ export default defineComponent({
      * @returns {string}
      */
     const formatLabel = (label) => {
-      if (!label) return ""
-      if (label.toLowerCase() === "index") return "Trang Chủ"
       return label
         .replace(/([a-z])([A-Z])/g, "$1 $2")
         .replace(/-/g, " ")
