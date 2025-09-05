@@ -66,8 +66,13 @@ export default defineComponent({
 
 
 <template>
-  <nav class="unit-breadcrumb" aria-label="Breadcrumb">
-    <ol class="unit-breadcrumb-list">
+  <nav
+    class="unit-breadcrumb"
+    aria-label="Breadcrumb"
+  >
+    <ol
+      class="unit-breadcrumb-list"
+    >
       <li
         v-for="(segment, index) in segments"
         :key="index"
@@ -85,7 +90,10 @@ export default defineComponent({
           </NuxtLink>
 
           <!-- Disabled segment -->
-          <span v-else class="unit-breadcrumb-disabled">
+          <span
+            v-else
+            class="unit-breadcrumb-disabled"
+          >
             {{ segment.label }}
           </span>
 
@@ -97,7 +105,10 @@ export default defineComponent({
         </template>
 
         <!-- Last segment -->
-        <span v-else class="unit-breadcrumb-current">
+        <span
+          v-else
+          class="unit-breadcrumb-current"
+        >
           {{ segment.label }}
         </span>
       </li>
