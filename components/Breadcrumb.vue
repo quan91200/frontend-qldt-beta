@@ -139,29 +139,29 @@ export default defineComponent({
   gap: var(--size-space-small);
 }
 
-.unit-breadcrumb-item > .unit-breadcrumb-link {
+.unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-item > .unit-breadcrumb-link {
   transition: color 0.2s ease;
   cursor: pointer;
 }
 
-.unit-breadcrumb-item > .unit-breadcrumb-link:hover {
+.unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-item > .unit-breadcrumb-link:hover {
   color: var(--color-blue-800);
 }
 
-.unit-breadcrumb-item > .unit-breadcrumb-disabled {
+.unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-item > .unit-breadcrumb-disabled {
   font-size: var(--font-size-body-medium);
   font-weight: var(--font-weight-medium);
   color: var(--color-gray-400);
   cursor: not-allowed;
 }
 
-.unit-breadcrumb-item > .unit-breadcrumb-current {
+.unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-item > .unit-breadcrumb-current {
   font-size: var(--font-size-body-medium);
   font-weight: var(--font-weight-medium);
   color: var(--color-gray-600);
 }
 
-.unit-breadcrumb-item > .unit-breadcrumb-separator {
+.unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-item > .unit-breadcrumb-separator {
   font-size: var(--font-size-md);
   color: var(--color-gray-400);
 }
