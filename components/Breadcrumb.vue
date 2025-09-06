@@ -83,49 +83,46 @@ export default defineComponent({
     class="unit-breadcrumb"
     aria-label="Breadcrumb"
   >
-    <ol
-      class="unit-breadcrumb-list"
+    <div
+      v-for="(segment, index) in segments"
+      :key="index"
+      class="unit-breadcrumb-item"
+      role="listitem"
     >
-      <li
-        v-for="(segment, index) in segments"
-        :key="index"
-        class="unit-breadcrumb-item"
-      >
-        <!-- Not last segment -->
-        <template v-if="index < segments.length - 1">
-          <!-- Linkable if not disabled -->
-          <NuxtLink
-            v-if="!isDisabled(segment)"
-            :to="segment.path"
-            class="unit-breadcrumb-link"
-          >
-            {{ segment.label }}
-          </NuxtLink>
+      <!-- Not last segment -->
+      <template v-if="index < segments.length - 1">
+        <!-- Linkable if not disabled -->
+        <NuxtLink
+          v-if="!isDisabled(segment)"
+          :to="segment.path"
+          class="unit-breadcrumb-link"
+        >
+          {{ segment.label }}
+        </NuxtLink>
 
-          <!-- Disabled segment -->
-          <span
-            v-else
-            class="unit-breadcrumb-disabled"
-          >
-            {{ segment.label }}
-          </span>
-
-          <!-- Separator -->
-          <Icon
-            name="mdi:chevron-right"
-            class="unit-breadcrumb-separator"
-          />
-        </template>
-
-        <!-- Last segment -->
+        <!-- Disabled segment -->
         <span
           v-else
-          class="unit-breadcrumb-current"
+          class="unit-breadcrumb-disabled"
         >
           {{ segment.label }}
         </span>
-      </li>
-    </ol>
+
+        <!-- Separator -->
+        <Icon
+          name="mdi:chevron-right"
+          class="unit-breadcrumb-separator"
+        />
+      </template>
+
+      <!-- Last segment -->
+      <span
+        v-else
+        class="unit-breadcrumb-current"
+      >
+        {{ segment.label }}
+      </span>
+    </div>
   </nav>
 </template>
 
@@ -136,18 +133,13 @@ export default defineComponent({
   align-items: center;
 }
 
-.unit-breadcrumb > .unit-breadcrumb-list {
-  display: flex;
-}
-
-.unit-breadcrumb-list > .unit-breadcrumb-item {
+.unit-breadcrumb-item {
   display: flex;
   align-items: center;
   gap: var(--size-space-small);
 }
 
 .unit-breadcrumb-item > .unit-breadcrumb-link {
-
   transition: color 0.2s ease;
   cursor: pointer;
 }
@@ -173,4 +165,5 @@ export default defineComponent({
   font-size: var(--font-size-md);
   color: var(--color-gray-400);
 }
+
 </style>
