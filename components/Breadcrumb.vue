@@ -133,7 +133,7 @@ export default defineComponent({
   align-items: center;
 }
 
-.unit-breadcrumb-item {
+.unit-breadcrumb > .unit-breadcrumb-item {
   display: flex;
   align-items: center;
   gap: var(--size-space-small);
