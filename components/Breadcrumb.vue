@@ -121,47 +121,41 @@ export default defineComponent({
   align-items: center;
 }
 
-.unit-breadcrumb-list {
+.unit-breadcrumb > .unit-breadcrumb-list {
   display: flex;
-  align-items: center;
-  gap: var(--size-space-small);
-
-  list-style: none;
 }
 
-.unit-breadcrumb-item {
+.unit-breadcrumb-list > .unit-breadcrumb-item {
   display: flex;
   align-items: center;
   gap: var(--size-space-small);
 }
 
-.unit-breadcrumb-link {
-  color: var(--color-blue-600);
-  font-size: var(--font-size-body-medium);
-  font-weight: var(--font-weight-medium);
+.unit-breadcrumb-item > .unit-breadcrumb-link {
+
   text-decoration: none;
   transition: color 0.2s ease;
   cursor: pointer;
 }
 
-.unit-breadcrumb-link:hover {
+.unit-breadcrumb-item > .unit-breadcrumb-link:hover {
   color: var(--color-blue-800);
 }
 
-.unit-breadcrumb-disabled {
+.unit-breadcrumb-item > .unit-breadcrumb-disabled {
   font-size: var(--font-size-body-medium);
   font-weight: var(--font-weight-medium);
   color: var(--color-gray-400);
   cursor: not-allowed;
 }
 
-.unit-breadcrumb-current {
+.unit-breadcrumb-item > .unit-breadcrumb-current {
   font-size: var(--font-size-body-medium);
   font-weight: var(--font-weight-medium);
   color: var(--color-gray-600);
 }
 
-.unit-breadcrumb-separator {
+.unit-breadcrumb-item > .unit-breadcrumb-separator {
   font-size: var(--font-size-md);
   color: var(--color-gray-400);
 }
