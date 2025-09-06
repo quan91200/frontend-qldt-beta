@@ -1,7 +1,17 @@
 <script>
-import { defineComponent, computed } from "vue"
-import { useRoute } from "vue-router"
-import { Icon, NuxtLink } from "#components"
+import {
+  defineComponent,
+  computed,
+} from "vue"
+
+import {
+  useRoute
+} from "vue-router"
+
+import {
+  Icon,
+  NuxtLink,
+} from "#components"
 
 export default defineComponent({
   name: "Breadcrumb",
@@ -12,21 +22,21 @@ export default defineComponent({
   },
 
   props: {
-    /**
-     * List of breadcrumb segments that should be disabled (not clickable).
-     * @type {string[]}
-     */
-    disabledSegments: {
-      type: Array,
-      default: () => [],
+      /**
+       * @type {import('vue').PropType<Array<string>>}
+       */
+      disabledSegments: {
+        type: Array,
+        default: () => [],
+      },
     },
-  },
 
   setup(props) {
     const route = useRoute()
 
     /**
      * Format a segment label into human-readable form
+     *
      * @param {string} label
      * @returns {string}
      */
@@ -39,6 +49,7 @@ export default defineComponent({
 
     /**
      * Computed breadcrumb segments
+     *
      * @type {import("vue").ComputedRef<{label: string, path: string}[]>}
      */
     const segments = computed(() => {
@@ -51,13 +62,17 @@ export default defineComponent({
 
     /**
      * Check if a segment is disabled
+     *
      * @param {{ label: string, path: string }} segment
      * @returns {boolean}
      */
     const isDisabled = (segment) =>
       props.disabledSegments.includes(segment.label)
 
-    return { segments, isDisabled }
+    return {
+       segments,
+       isDisabled
+    }
   },
 })
 </script>
@@ -133,7 +148,6 @@ export default defineComponent({
 
 .unit-breadcrumb-item > .unit-breadcrumb-link {
 
-  text-decoration: none;
   transition: color 0.2s ease;
   cursor: pointer;
 }
