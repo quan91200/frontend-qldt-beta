@@ -92,6 +92,10 @@ export default defineComponent({
 .unit-section {
   position: relative;
 
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-space-tiny);
+
   width: 100%;
 }
 
@@ -111,6 +115,9 @@ export default defineComponent({
 
 .unit-section > .accordion-header > .header-content {
   flex: 1;
+
+  display: flex;
+  gap: var(--size-space-tiny);
 }
 
 .unit-section.is-open > .accordion-header > .header-content {
@@ -148,7 +155,12 @@ export default defineComponent({
 }
 
 .unit-section.is-open > .accordion-content {
-  display: block;
+  margin-inline-start: var(--size-space-large);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-space-tiny);
+
   animation: slide-down 250ms ease;
 }
 
