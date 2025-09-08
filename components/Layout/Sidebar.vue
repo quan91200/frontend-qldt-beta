@@ -26,6 +26,10 @@ export default defineComponent({
         iconName: 'ph:monitor',
       },
       {
+        label: 'Accordion',
+        href: '/DemoAccordion',
+      },
+      {
         label: 'Button',
         href: '/DemoButton',
       },
