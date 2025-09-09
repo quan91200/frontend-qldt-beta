@@ -30,6 +30,14 @@ export default defineComponent({
         href: '/DemoAccordion',
       },
       {
+        label: 'Badge',
+        href: '/DemoBadge',
+      },
+      {
+        label: 'Breadcrumb',
+        href: '/DemoBreadcrumb',
+      },
+      {
         label: 'Button',
         href: '/DemoButton',
       },
