@@ -15,7 +15,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="demo-badge">
+  <div class="unit-demo-badge">
     <h1>Badge Demo</h1>
 
     <!-- Standard badges with colors -->
@@ -223,17 +223,21 @@ export default defineComponent({
 </template>
 
 <style scoped>
-.demo-badge {
+.unit-demo-badge {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 1rem;
+
+  gap: var(--size-space-large);
+  padding: var(--size-space-large);
+
+  background-color: var(--color-gray-50);
 }
 
-.demo-badge section {
+.unit-demo-badge section {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.5rem;
+
+  gap: var(--size-space-large);
 }
 </style>
