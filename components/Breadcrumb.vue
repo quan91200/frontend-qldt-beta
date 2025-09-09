@@ -110,7 +110,7 @@ export default defineComponent({
 
         <!-- Separator -->
         <Icon
-          name="mdi:chevron-right"
+          name="ph:caret-right"
           class="unit-breadcrumb-separator"
         />
       </template>
@@ -129,19 +129,36 @@ export default defineComponent({
 
 <style scoped>
 .unit-breadcrumb {
+  border-radius: var(--size-border-radius);
+  padding-inline: var(--size-body-medium);
+  padding-block: var(--size-space-small);
+
   display: flex;
   align-items: center;
+
+  background-color: var(--color-gray-50);
 }
 
 .unit-breadcrumb > .unit-breadcrumb-item {
+  padding-inline: var(--size-space-tiny);
   display: flex;
   align-items: center;
   gap: var(--size-space-small);
 }
 
-.unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-link {
+.unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-link,
+.unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-current {
+  border-radius: var(--size-border-radius-large);
+  padding-inline: var(--size-space-small);
+  padding-block: var(--size-space-tiny);
+
   transition: color 0.2s ease;
   cursor: pointer;
+
+  color: var(--color-gray-800);
+  font-weight: var(--font-weight-medium);
+
+  background-color: var(--color-gray-200);
 }
 
 .unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-link:hover {
@@ -155,15 +172,9 @@ export default defineComponent({
   cursor: not-allowed;
 }
 
-.unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-current {
-  font-size: var(--font-size-body-medium);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-gray-600);
-}
-
 .unit-breadcrumb > .unit-breadcrumb-item > .unit-breadcrumb-separator {
-  font-size: var(--font-size-md);
-  color: var(--color-gray-400);
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-800);
 }
 
 </style>
