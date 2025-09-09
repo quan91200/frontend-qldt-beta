@@ -21,7 +21,7 @@ export default defineComponent({
   <div class="unit-demo-breadcrumb">
     <Breadcrumb />
 
-    <h1>Settings Page</h1>
+    <h1>Users Page</h1>
     <NuxtLink to="/DemoBreadcrumb">
       Back to Breadcrumb
     </NuxtLink>
