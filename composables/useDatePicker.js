@@ -24,9 +24,9 @@ export const useDatePicker = (options = {}) => {
 
   // Computed properties
   const isEmpty = computed(() => !value.value || value.value.trim() === '')
-  
+
   const hasError = computed(() => Boolean(error.value))
-  
+
   const formattedValue = computed(() => {
     if (!value.value) return ''
     return formatDateTime(value.value, format)
@@ -68,21 +68,21 @@ export const useDatePicker = (options = {}) => {
     if (!value.value) return null
 
     const selectedDate = new Date(value.value.split(' ')[0])
-    
+
     if (minDate) {
       const min = new Date(minDate)
       if (selectedDate < min) {
         return `Date must be after ${formatDate(minDate)}`
       }
     }
-    
+
     if (maxDate) {
       const max = new Date(maxDate)
       if (selectedDate > max) {
         return `Date must be before ${formatDate(maxDate)}`
       }
     }
-    
+
     return null
   }
 
@@ -135,12 +135,12 @@ export const useDatePicker = (options = {}) => {
   // Utility functions
   const formatDate = (dateString, formatStr = 'DD/MM/YYYY') => {
     if (!dateString) return ''
-    
+
     const date = new Date(dateString)
     const day = String(date.getDate()).padStart(2, '0')
     const month = String(date.getMonth() + 1).padStart(2, '0')
     const year = date.getFullYear()
-    
+
     switch (formatStr) {
       case 'DD/MM/YYYY':
         return `${day}/${month}/${year}`
@@ -155,15 +155,15 @@ export const useDatePicker = (options = {}) => {
 
   const formatTime = (timeString, formatStr = 'HH:mm') => {
     if (!timeString) return ''
-    
+
     // Handle full datetime string
     if (timeString.includes(' ')) {
       timeString = timeString.split(' ')[1]
     }
-    
+
     const [hours, minutes] = timeString.split(':')
     const hour24 = parseInt(hours)
-    
+
     switch (formatStr) {
       case 'HH:mm':
         return `${String(hour24).padStart(2, '0')}:${minutes}`
@@ -178,23 +178,23 @@ export const useDatePicker = (options = {}) => {
 
   const formatDateTime = (dateTimeString, formatStr = 'DD/MM/YYYY HH:mm') => {
     if (!dateTimeString) return ''
-    
+
     const [datePart, timePart] = dateTimeString.split(' ')
-    
+
     if (!timePart) {
       // Date only
       return formatDate(datePart, formatStr)
     }
-    
+
     const formattedDate = formatDate(datePart, 'DD/MM/YYYY')
     const formattedTime = formatTime(timePart, 'HH:mm')
-    
+
     return `${formattedDate} ${formattedTime}`
   }
 
   const parseDateTime = (dateTimeString) => {
     if (!dateTimeString) return null
-    
+
     const date = new Date(dateTimeString)
     return {
       date: date.toISOString().split('T')[0],
@@ -207,10 +207,10 @@ export const useDatePicker = (options = {}) => {
 
   const addDays = (dateString, days) => {
     if (!dateString) return ''
-    
+
     const date = new Date(dateString.split(' ')[0])
     date.setDate(date.getDate() + days)
-    
+
     const timePart = dateString.includes(' ') ? ' ' + dateString.split(' ')[1] : ''
     return date.toISOString().split('T')[0] + timePart
   }
@@ -221,7 +221,7 @@ export const useDatePicker = (options = {}) => {
 
   const getDaysBetween = (startDate, endDate) => {
     if (!startDate || !endDate) return 0
-    
+
     const start = new Date(startDate.split(' ')[0])
     const end = new Date(endDate.split(' ')[0])
     const diffTime = Math.abs(end - start)
@@ -230,7 +230,7 @@ export const useDatePicker = (options = {}) => {
 
   const isWeekend = (dateString) => {
     if (!dateString) return false
-    
+
     const date = new Date(dateString.split(' ')[0])
     const day = date.getDay()
     return day === 0 || day === 6 // Sunday or Saturday
@@ -238,7 +238,7 @@ export const useDatePicker = (options = {}) => {
 
   const getWeekday = (dateString) => {
     if (!dateString) return ''
-    
+
     const date = new Date(dateString.split(' ')[0])
     const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     return weekdays[date.getDay()]
@@ -248,7 +248,7 @@ export const useDatePicker = (options = {}) => {
   const handleChange = (newValue) => {
     value.value = newValue
     isDirty.value = true
-    
+
     if (validateOnChange) {
       validateDateTime()
     }
@@ -294,21 +294,21 @@ export const useDatePicker = (options = {}) => {
       const time = now.toTimeString().substring(0, 5)
       return `${date} ${time}`
     },
-    
+
     tomorrow: () => {
       const date = new Date()
       date.setDate(date.getDate() + 1)
       const dateStr = date.toISOString().split('T')[0]
       return `${dateStr} 09:00`
     },
-    
+
     nextWeek: () => {
       const date = new Date()
       date.setDate(date.getDate() + 7)
       const dateStr = date.toISOString().split('T')[0]
       return `${dateStr} 09:00`
     },
-    
+
     nextMonday: () => {
       const date = new Date()
       const dayOfWeek = date.getDay()
@@ -334,7 +334,7 @@ export const useDatePicker = (options = {}) => {
     isValid,
     isDirty,
     isTouched,
-    
+
     // Computed
     isEmpty,
     hasError,
@@ -343,7 +343,7 @@ export const useDatePicker = (options = {}) => {
     tomorrow,
     nextWeek,
     nextMonth,
-    
+
     // Methods
     validateDateTime,
     handleChange,
@@ -351,7 +351,7 @@ export const useDatePicker = (options = {}) => {
     handleBlur,
     reset,
     clear,
-    
+
     // Utilities
     formatDate,
     formatTime,
@@ -362,7 +362,7 @@ export const useDatePicker = (options = {}) => {
     getDaysBetween,
     isWeekend,
     getWeekday,
-    
+
     // Presets
     presets,
     setPreset
@@ -387,14 +387,14 @@ export const useDateRange = (options = {}) => {
     ...options,
     customValidation: (value) => {
       if (!validateRange || !value || !endPicker.value.value) return null
-      
+
       const start = new Date(value.split(' ')[0])
       const end = new Date(endPicker.value.value.split(' ')[0])
-      
+
       if (start >= end) {
         return 'Start date must be before end date'
       }
-      
+
       return null
     }
   })
@@ -404,24 +404,23 @@ export const useDateRange = (options = {}) => {
     ...options,
     customValidation: (value) => {
       if (!validateRange || !value || !startPicker.value.value) return null
-      
+
       const start = new Date(startPicker.value.value.split(' ')[0])
       const end = new Date(value.split(' ')[0])
-      
+
       if (end <= start) {
         return 'End date must be after start date'
       }
-      
+
       const daysBetween = Math.ceil((end - start) / (1000 * 60 * 60 * 24))
-      
+
       if (minGap && daysBetween < minGap) {
         return `Minimum ${minGap} days required between dates`
       }
-      
+
       if (maxGap && daysBetween > maxGap) {
         return `Maximum ${maxGap} days allowed between dates`
       }
-      
       return null
     }
   })

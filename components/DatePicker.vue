@@ -8,7 +8,7 @@ import {
 
 export default defineComponent({
   name: "DatePicker",
-  
+
   props: {
     modelValue: {
       type: String,
@@ -79,7 +79,6 @@ export default defineComponent({
       return now.toISOString().split('T')[0]
     })
 
-    // đồng bộ từ ngoài vào trong
     watch(
       () => props.modelValue,
       (val) => {
@@ -103,10 +102,9 @@ export default defineComponent({
       { immediate: true }
     )
 
-    // đồng bộ từ trong ra ngoài
     watch([date, time], () => {
       let value = ""
-      
+
       if (props.dateOnly && date.value) {
         value = date.value
       } else if (props.timeOnly && time.value) {
@@ -114,7 +112,7 @@ export default defineComponent({
       } else if (date.value && time.value) {
         value = `${date.value} ${time.value}`
       }
-      
+
       emit("update:modelValue", value)
       emit("change", value)
     })
@@ -152,17 +150,33 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="unit-date-time-picker" :class="{ 'has-error': hasError, 'is-disabled': isDisabled, 'is-focused': isFocused }">
+  <div
+    class="unit-date-time-picker"
+    :class="{ 'has-error': hasError, 'is-disabled': isDisabled, 'is-focused': isFocused }"
+  >
     <!-- Label -->
-    <label v-if="label" class="unit-picker-label">
+    <label
+      v-if="label"
+      class="unit-picker-label"
+    >
       {{ label }}
-      <span v-if="required" class="required-asterisk">*</span>
+      <span
+        v-if="required"
+        class="required-asterisk"
+      >
+        *
+      </span>
     </label>
 
     <!-- Input wrapper -->
-    <div class="unit-picker-wrapper">
+    <div
+      class="unit-picker-wrapper"
+    >
       <!-- Date input -->
-      <div v-if="showDate" class="unit-input-group">
+      <div
+        v-if="showDate"
+        class="unit-input-group"
+      >
         <input
           type="date"
           v-model="date"
@@ -170,7 +184,7 @@ export default defineComponent({
           :placeholder="placeholderDate"
           :disabled="isDisabled"
           :required="required"
-          :min="minDate || (today)"
+          :min="minDate || today"
           :max="maxDate"
           @focus="handleFocus"
           @blur="handleBlur"
@@ -178,7 +192,10 @@ export default defineComponent({
       </div>
 
       <!-- Time input -->
-      <div v-if="showTime" class="unit-input-group">
+      <div
+        v-if="showTime"
+        class="unit-input-group"
+      >
         <input
           type="time"
           v-model="time"
@@ -204,12 +221,18 @@ export default defineComponent({
     </div>
 
     <!-- Error message -->
-    <div v-if="hasError" class="unit-error-message">
+    <div
+      v-if="hasError"
+      class="unit-error-message"
+    >
       {{ error }}
     </div>
 
     <!-- Helper text -->
-    <div v-if="!hasError && (showDate && showTime)" class="unit-helper-text">
+    <div
+      v-if="!hasError && (showDate && showTime)"
+      class="unit-helper-text"
+    >
       Select both date and time for complete datetime
     </div>
   </div>
@@ -342,12 +365,12 @@ export default defineComponent({
     border-color: #374151;
     color: #f9fafb;
   }
-  
+
   .unit-input-group > .unit-date-input:focus,
   .unit-input-group > .unit-time-input:focus {
     border-color: #3b82f6;
   }
-  
+
   .unit-date-time-picker > .unit-picker-label {
     color: #f9fafb;
   }
@@ -359,14 +382,14 @@ export default defineComponent({
     flex-direction: column;
     gap: 12px;
   }
-  
+
   .unit-picker-wrapper > .unit-clear-btn {
     position: absolute;
     right: 12px;
     top: 12px;
     transform: none;
   }
-  
+
   .unit-input-group > .unit-date-input,
   .unit-input-group > .unit-time-input {
     padding-right: 40px;
