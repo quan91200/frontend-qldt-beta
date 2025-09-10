@@ -57,7 +57,11 @@ export default defineComponent({
     dateOnly: {
       type: Boolean,
       default: false
-    }
+    },
+    restrictToTodayOrLater: {
+    type: Boolean,
+    default: false
+    },
   },
 
   emits: ["update:modelValue", "change", "focus", "blur"],
@@ -184,7 +188,9 @@ export default defineComponent({
           :placeholder="placeholderDate"
           :disabled="isDisabled"
           :required="required"
-          :min="minDate || today"
+          :min="restrictToTodayOrLater
+            ? minDate || today
+            : minDate"
           :max="maxDate"
           @focus="handleFocus"
           @blur="handleBlur"

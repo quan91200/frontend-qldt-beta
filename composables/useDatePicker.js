@@ -1,9 +1,23 @@
-import { ref, computed, watch } from 'vue'
+import {
+  ref,
+  computed,
+  watch
+} from 'vue'
 
 /**
  * Composable for enhanced DatePicker functionality
  * Provides validation, formatting, and utility functions for date/time handling
+ *
+ * @param {Object} [options={}] - Configuration options for the DatePicker.
+ * @param {string} [options.initialValue=""] - Initial date/time value
+ * ...
+ *
+ * @returns {{
+ *  value: import('vue').Ref<string>
+ *  error: import('vue').Ref<string>
+ *  ...
  */
+
 export const useDatePicker = (options = {}) => {
   const {
     initialValue = '',
@@ -12,7 +26,9 @@ export const useDatePicker = (options = {}) => {
     maxDate = null,
     format = 'YYYY-MM-DD HH:mm',
     validateOnChange = true,
-    customValidation = null
+    customValidation = null,
+    dateOnly = false,
+    timeOnly = false
   } = options
 
   // Reactive state
@@ -93,12 +109,49 @@ export const useDatePicker = (options = {}) => {
       return isValid.value
     }
 
-    // Check if the format is valid
-    const dateTimeRegex = /^\d{4}-\d{2}-\d{2}( \d{2}:\d{2})?$/
-    if (!dateTimeRegex.test(value.value)) {
-      error.value = 'Invalid date/time format'
+    // Define regex patterns for different modes
+    let isValidFormat = false
+
+    if (timeOnly) {
+      // Time only format: HH:mm or H:mm
+      const timeOnlyRegex = /^\d{1,2}:\d{2}$/
+      isValidFormat = timeOnlyRegex.test(value.value)
+    } else if (dateOnly) {
+      // Date only format: YYYY-MM-DD
+      const dateOnlyRegex = /^\d{4}-\d{2}-\d{2}$/
+      isValidFormat = dateOnlyRegex.test(value.value)
+    } else {
+      // DateTime format: YYYY-MM-DD HH:mm or just YYYY-MM-DD
+      const dateTimeRegex = /^\d{4}-\d{2}-\d{2}( \d{1,2}:\d{2})?$/
+      isValidFormat = dateTimeRegex.test(value.value)
+    }
+
+    if (!isValidFormat) {
+      const expectedFormat = timeOnly ? 'HH:mm' : dateOnly ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm'
+      error.value = `Invalid format. Expected: ${expectedFormat}`
       isValid.value = false
       return false
+    }
+
+    // Validate that the date/time is actually valid (not just format)
+    if (!timeOnly) {
+      const datePart = value.value.split(' ')[0]
+      const testDate = new Date(datePart)
+      if (isNaN(testDate.getTime())) {
+        error.value = 'Invalid date'
+        isValid.value = false
+        return false
+      }
+    }
+
+    if (!dateOnly && value.value.includes(' ')) {
+      const timePart = value.value.split(' ')[1]
+      const [hours, minutes] = timePart.split(':').map(Number)
+      if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+        error.value = 'Invalid time'
+        isValid.value = false
+        return false
+      }
     }
 
     // Validate required
@@ -109,12 +162,14 @@ export const useDatePicker = (options = {}) => {
       return false
     }
 
-    // Validate date range
-    const rangeError = validateDateRange()
-    if (rangeError) {
-      error.value = rangeError
-      isValid.value = false
-      return false
+    // Validate date range (only for date-containing modes)
+    if (!timeOnly) {
+      const rangeError = validateDateRange()
+      if (rangeError) {
+        error.value = rangeError
+        isValid.value = false
+        return false
+      }
     }
 
     // Custom validation
@@ -181,15 +236,54 @@ export const useDatePicker = (options = {}) => {
 
     const [datePart, timePart] = dateTimeString.split(' ')
 
-    if (!timePart) {
-      // Date only
-      return formatDate(datePart, formatStr)
+    // Handle different format patterns
+    if (formatStr.includes('YYYY') || formatStr.includes('MM') || formatStr.includes('DD')) {
+      // Contains date formatting
+      if (formatStr.includes('HH') || formatStr.includes('mm') || formatStr.includes('A')) {
+        // Contains both date and time formatting
+        if (!timePart) {
+          // Only date part available, format just the date
+          return formatDate(datePart, extractDateFormat(formatStr))
+        }
+
+        // Format both date and time according to formatStr
+        const dateFormatPart = extractDateFormat(formatStr)
+        const timeFormatPart = extractTimeFormat(formatStr)
+
+        const formattedDate = formatDate(datePart, dateFormatPart)
+        const formattedTime = formatTime(timePart, timeFormatPart)
+
+        // Reconstruct according to the original format pattern
+        return formatStr
+          .replace(/DD\/MM\/YYYY|MM\/DD\/YYYY|YYYY-MM-DD/g, formattedDate)
+          .replace(/HH:mm|h:mm A/g, formattedTime)
+      } else {
+        // Only date formatting requested
+        return formatDate(datePart, formatStr)
+      }
+    } else if (formatStr.includes('HH') || formatStr.includes('mm') || formatStr.includes('A')) {
+      // Only time formatting requested
+      return formatTime(timePart || datePart, formatStr)
+    } else {
+      // Fallback to original behavior
+      const formattedDate = formatDate(datePart, 'DD/MM/YYYY')
+      const formattedTime = timePart ? formatTime(timePart, 'HH:mm') : ''
+      return timePart ? `${formattedDate} ${formattedTime}` : formattedDate
     }
+  }
 
-    const formattedDate = formatDate(datePart, 'DD/MM/YYYY')
-    const formattedTime = formatTime(timePart, 'HH:mm')
+  // Helper functions to extract date and time format parts
+  const extractDateFormat = (formatStr) => {
+    if (formatStr.includes('DD/MM/YYYY')) return 'DD/MM/YYYY'
+    if (formatStr.includes('MM/DD/YYYY')) return 'MM/DD/YYYY'
+    if (formatStr.includes('YYYY-MM-DD')) return 'YYYY-MM-DD'
+    return 'DD/MM/YYYY' // default
+  }
 
-    return `${formattedDate} ${formattedTime}`
+  const extractTimeFormat = (formatStr) => {
+    if (formatStr.includes('h:mm A')) return 'h:mm A'
+    if (formatStr.includes('HH:mm')) return 'HH:mm'
+    return 'HH:mm' // default
   }
 
   const parseDateTime = (dateTimeString) => {
@@ -292,6 +386,9 @@ export const useDatePicker = (options = {}) => {
       const now = new Date()
       const date = now.toISOString().split('T')[0]
       const time = now.toTimeString().substring(0, 5)
+
+      if (timeOnly) return time
+      if (dateOnly) return date
       return `${date} ${time}`
     },
 
@@ -299,6 +396,9 @@ export const useDatePicker = (options = {}) => {
       const date = new Date()
       date.setDate(date.getDate() + 1)
       const dateStr = date.toISOString().split('T')[0]
+
+      if (timeOnly) return '09:00'
+      if (dateOnly) return dateStr
       return `${dateStr} 09:00`
     },
 
@@ -306,6 +406,9 @@ export const useDatePicker = (options = {}) => {
       const date = new Date()
       date.setDate(date.getDate() + 7)
       const dateStr = date.toISOString().split('T')[0]
+
+      if (timeOnly) return '09:00'
+      if (dateOnly) return dateStr
       return `${dateStr} 09:00`
     },
 
@@ -315,8 +418,16 @@ export const useDatePicker = (options = {}) => {
       const daysUntilMonday = dayOfWeek === 0 ? 1 : 8 - dayOfWeek
       date.setDate(date.getDate() + daysUntilMonday)
       const dateStr = date.toISOString().split('T')[0]
+
+      if (timeOnly) return '09:00'
+      if (dateOnly) return dateStr
       return `${dateStr} 09:00`
-    }
+    },
+
+    // Time-specific presets
+    morning: () => timeOnly || !dateOnly ? '09:00' : '',
+    afternoon: () => timeOnly || !dateOnly ? '14:00' : '',
+    evening: () => timeOnly || !dateOnly ? '18:00' : ''
   }
 
   const setPreset = (presetName) => {
@@ -379,14 +490,22 @@ export const useDateRange = (options = {}) => {
     endDate = '',
     minGap = 0, // Minimum days between start and end
     maxGap = null, // Maximum days between start and end
-    validateRange = true
+    validateRange = true,
+    dateOnly = false,
+    timeOnly = false,
+    ...pickerOptions
   } = options
 
   const startPicker = useDatePicker({
     initialValue: startDate,
-    ...options,
+    dateOnly,
+    timeOnly,
+    ...pickerOptions,
     customValidation: (value) => {
       if (!validateRange || !value || !endPicker.value.value) return null
+
+      // Skip range validation for time-only mode
+      if (timeOnly) return null
 
       const start = new Date(value.split(' ')[0])
       const end = new Date(endPicker.value.value.split(' ')[0])
@@ -401,9 +520,14 @@ export const useDateRange = (options = {}) => {
 
   const endPicker = useDatePicker({
     initialValue: endDate,
-    ...options,
+    dateOnly,
+    timeOnly,
+    ...pickerOptions,
     customValidation: (value) => {
       if (!validateRange || !value || !startPicker.value.value) return null
+
+      // Skip range validation for time-only mode
+      if (timeOnly) return null
 
       const start = new Date(startPicker.value.value.split(' ')[0])
       const end = new Date(value.split(' ')[0])
@@ -427,10 +551,26 @@ export const useDateRange = (options = {}) => {
 
   const duration = computed(() => {
     if (!startPicker.value.value || !endPicker.value.value) return 0
+
+    // For time-only mode, calculate duration in minutes
+    if (timeOnly) {
+      const startTime = startPicker.value.value.split(':')
+      const endTime = endPicker.value.value.split(':')
+      const startMinutes = parseInt(startTime[0]) * 60 + parseInt(startTime[1])
+      const endMinutes = parseInt(endTime[0]) * 60 + parseInt(endTime[1])
+      return Math.abs(endMinutes - startMinutes)
+    }
+
+    // For date modes, calculate duration in days
     return startPicker.getDaysBetween(startPicker.value.value, endPicker.value.value)
   })
 
   const isValidRange = computed(() => {
+    if (timeOnly) {
+      // For time-only, just check if both values are valid
+      return startPicker.isValid.value && endPicker.isValid.value
+    }
+    // For date modes, check validity and that duration > 0
     return startPicker.isValid.value && endPicker.isValid.value && duration.value > 0
   })
 
