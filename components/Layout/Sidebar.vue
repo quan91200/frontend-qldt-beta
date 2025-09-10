@@ -49,6 +49,10 @@ export default defineComponent({
         label: 'Modal',
         href: '/DemoModal'
       },
+      {
+        label: 'Tab',
+        href: '/DemoTab'
+      },
     ]
 
     return {
