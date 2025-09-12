@@ -104,13 +104,14 @@ export default defineComponent({
 
 <style scoped>
 .unit-container {
+  padding-inline: var(--size-space-medium);
+  padding-block: var(--size-space-medium);
+
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: var(--size-space-medium);
 
-  padding-inline: var(--size-space-medium);
-  padding-block: var(size---size-space-medium);
+  gap: var(--size-space-medium);
 }
 
 .unit-container > .unit-avatar {
