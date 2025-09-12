@@ -8,15 +8,17 @@ import {
 } from "#components"
 
 import Dropdown from "~/components/Dropdown.vue"
-import Badge from '~/components/Badge.vue'
+import Badge from "~/components/Badge.vue"
+import Avatar from "~/components/Avatar"
 
 export default defineComponent({
   name: "Header",
 
   components: {
-    Dropdown,
+    Avatar,
     Badge,
-    Icon
+    Dropdown,
+    Icon,
   },
 })
 </script>
@@ -41,14 +43,14 @@ export default defineComponent({
         <Dropdown dropdownPosition="right">
           <template #trigger="{ isOpen }">
             <div class="unit-user-profile">
-              <div class="unit-profile-avatar">
-                <span>
-                  U
-                </span>
-              </div>
-              <span class="unit-profile-name">
-                User
-              </span>
+              <Avatar
+                src="https://i.pravatar.cc/150?img=3"
+                alt="User Avatar"
+                name="Nguyen Van A"
+                size="md"
+                rounded
+                bordered
+              />
               <Icon
                 name="mdi:chevron-down"
                 class="unit-dropdown-arrow"
@@ -118,22 +120,6 @@ export default defineComponent({
 
 .unit-user-profile:hover {
   background-color: var(--color-gray-200);
-}
-
-.unit-user-profile > .unit-profile-avatar {
-  width: var(--size-avatar-md);
-  height: var(--size-avatar-md);
-
-  border-radius: var(--size-border-radius-full);
-  background: var(--avatar-linear-gradient);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: var(--color-teal-50);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
 }
 
 .unit-user-profile > .unit-profile-name {
