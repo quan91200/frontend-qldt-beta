@@ -110,10 +110,14 @@ export default defineComponent({
   top: var(--size-header-height);
   width: var(--size-sidebar-width);
 
+  padding-block: var(--size-space-medium);
+
   max-height: calc(100vh - var(--size-header-height));
   overflow-y: auto;
 
   flex-shrink: 0;
+
+  background-color: var(--color-gray-50);
 }
 
 .unit-container > .unit-navlinks {
@@ -123,8 +127,6 @@ export default defineComponent({
 }
 
 .unit-container > .unit-navlinks > .unit-li > .navlink {
-  border-radius: var(--size-border-radius-full);
-
   padding: var(--size-space-medium);
 
   display: flex;
@@ -138,11 +140,11 @@ export default defineComponent({
 
 .unit-container > .unit-navlinks > .unit-li > .navlink:hover,
 .unit-container > .unit-navlinks > .unit-li > .navlink:focus-visible {
-  background-color: var(--color-gray-400);
+  background-color: var(--color-gray-200);
 }
 
 .unit-container > .unit-navlinks > .unit-li > .navlink.router-link-active {
-  background-color: var(--color-gray-500);
+  background-color: var(--color-gray-400);
   color: var(--color-gray-100);
 }
 
