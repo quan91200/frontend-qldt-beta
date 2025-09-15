@@ -86,7 +86,15 @@ export default defineComponent({
 .unit-header {
   width: 100%;
   height: var(--size-header-height);
-  position: sticky;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 1000;
+
+  background-color: var(--color-gray-50);
 }
 
 .unit-header > .unit-header-container {

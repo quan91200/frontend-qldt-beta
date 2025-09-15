@@ -29,19 +29,27 @@ export default {
 
 <style>
 .unit-container {
+  height: 100dvh;
+
   color: var(--color-zinc-900);
   background-color: var(--color-gray-50);
+
+  overflow: unset;
 }
 </style>
 
 <style scoped>
 .unit-content {
+  min-width: 0;
+
   flex-grow: 1;
   display: flex;
-  min-width: 0;
+
+  gap: var(--size-space-tiny);
 }
 
 .unit-content > .unit-main {
+  margin-block-start: var(--size-header-height);
   margin-block-end: var(--size-space-large);
   margin-inline-end: var(--size-space-large);
 
@@ -53,6 +61,7 @@ export default {
   min-height: calc(100dvh - var(--size-header-height) - 1rem);
   background-color: var(--color-gray-200);
 
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 </style>
