@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.3",
+    "eslint-plugin-jsdoc": "^57.0.8",
     "eslint-plugin-vue": "^10.4.0"
   }
 }

@@ -3,6 +3,9 @@ import {
   useRouter
 } from 'vue-router'
 
+/**
+ * QueryParamManager
+ */
 export class QueryParamManager {
   /**
    * Constructor of this class.
