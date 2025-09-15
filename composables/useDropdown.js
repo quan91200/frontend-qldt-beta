@@ -11,7 +11,7 @@ import {
   useDebounce
 } from '~/composables/useDebounce'
 
-/**\
+/**
  * Composables for dropdown behavior.
  *
  * Handles:
@@ -43,7 +43,7 @@ import {
  *   calculatePosition: () => Promise<void>
  * }}
  */
-export default useDropdown = (props) => {
+export default function useDropdown(props) {
   const isOpen = ref(false)
   const dropdownRef = ref(null)
   const contentRef = ref(null)
