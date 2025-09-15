@@ -117,7 +117,7 @@ export default defineComponent({
 
   flex-shrink: 0;
 
-  background-color: var(--color-gray-50);
+  background-color: white;
 }
 
 .unit-container > .unit-navlinks {
