@@ -94,7 +94,8 @@ export default defineComponent({
 
   z-index: 1000;
 
-  background-color: var(--color-gray-50);
+  background-color: var(--color-header-backdrop);
+  backdrop-filter: blur(2px);
 }
 
 .unit-header > .unit-header-container {
