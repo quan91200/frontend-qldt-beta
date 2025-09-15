@@ -5,6 +5,9 @@ import {
   ref,
 } from 'vue'
 
+/**
+ * useModal
+ */
 export function useModal(
   props,
   emit,

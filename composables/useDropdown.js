@@ -43,7 +43,7 @@ import {
  *   calculatePosition: () => Promise<void>
  * }}
  */
-export default function useDropdown(props) {
+export default useDropdown = (props) => {
   const isOpen = ref(false)
   const dropdownRef = ref(null)
   const contentRef = ref(null)
