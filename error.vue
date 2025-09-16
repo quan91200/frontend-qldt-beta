@@ -3,11 +3,6 @@ import {
   defineComponent,
 } from 'vue'
 
-import {
-  Icon,
-  NuxtLink,
-} from '#components'
-
 import NuxtLayout from '#app/components/nuxt-layout.js'
 
 import ErrorContext from './app/contexts/ErrorContext'
@@ -17,8 +12,6 @@ import Button from '~/components/Button.vue'
 export default defineComponent({
   components: {
     NuxtLayout,
-    Icon,
-    NuxtLink,
     Button,
   },
 

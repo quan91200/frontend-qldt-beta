@@ -276,7 +276,12 @@ export default [
       'vue/no-undef-components': [
         'error',
         {
-          ignorePatterns: [],
+          ignorePatterns: [
+            'NuxtLink',
+            'NuxtLayout',
+            'NuxtPage',
+            'Icon'
+          ],
         },
       ],
       'vue/no-unused-components': [
