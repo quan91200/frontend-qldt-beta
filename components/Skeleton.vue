@@ -17,7 +17,7 @@ export default defineComponent({
     }
   },
 
-  setup(props) {
+  setup() {
     return {
       props,
     }
@@ -28,9 +28,7 @@ export default defineComponent({
 <template>
   <div
     class="skeleton-block"
-    :class="[
-      type === props.type,
-    ]"
+    :class="props.type"
   />
 </template>
 
