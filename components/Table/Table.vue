@@ -95,7 +95,7 @@ export default defineComponent({
             :colspan="props.columns.length"
             class="cell loading"
           >
-            <slot>
+            <slot name="isLoading">
               Loading
             </slot>
           </td>
@@ -105,10 +105,12 @@ export default defineComponent({
           v-else-if="props.errorMessages"
           class="row"
         >
-          <td class="cell error-message">
+          <td
+            :colspan="props.columns.length"
+            class="cell error-message"
+          >
             <slot
               name="errorMessage"
-              :colspan="props.columns.length"
             >
               {{ props.errorMessages }}
             </slot>
@@ -116,14 +118,16 @@ export default defineComponent({
         </tr>
 
         <tr
-          v-else-if="props.data.length <= 0"
+          v-else-if="!props.data.length"
           class="row"
         >
           <td
             :colspan="props.columns.length"
             class="cell empty"
           >
-            <slot>
+            <slot
+              name="empty"
+            >
               <EmptyState
                 :title="props.emptyState.title"
                 :desc="props.emptyState.desc"
