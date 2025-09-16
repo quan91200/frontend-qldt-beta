@@ -7,6 +7,7 @@ import {
 
 import Skeleton from '~/components/Skeleton.vue'
 import Button from '~/components/Button.vue'
+import Avatar from '~/components/Avatar.vue'
 
 export default defineComponent({
   name: 'BlogPage',
@@ -14,6 +15,7 @@ export default defineComponent({
   components: {
     Skeleton,
     Button,
+    Avatar,
   },
 
   setup() {
@@ -41,7 +43,7 @@ export default defineComponent({
               name: 'Ethan Walker',
               avatar: 'https://i.pravatar.cc/100'
             },
-            createdAt: '2024-01-15T10:00:00Z'
+            createdAt: '2025-09-16T10:00:00Z'
           },
           {
             id: 2,
@@ -51,7 +53,7 @@ export default defineComponent({
               name: 'Noah Bennett',
               avatar: 'https://i.pravatar.cc/80'
             },
-            createdAt: '2024-01-10T14:30:00Z'
+            createdAt: '2025-09-16T14:30:00Z'
           },
           {
             id: 3,
@@ -61,7 +63,7 @@ export default defineComponent({
               name: 'Ava Thompson',
               avatar: 'https://i.pravatar.cc/50'
             },
-            createdAt: '2024-01-05T09:15:00Z'
+            createdAt: '2025-09-16T09:15:00Z'
           }
         ]
 
@@ -119,11 +121,11 @@ export default defineComponent({
         class="profile-header"
         v-else
       >
-        <img
+        <Avatar
           :src="user.avatar"
           :alt="user.name"
-          class="avatar"
-        >
+          size="xl"
+        />
         <div class="profile-info">
           <h1 class="user-name">
             {{ user.name }}
@@ -146,7 +148,7 @@ export default defineComponent({
         <!-- Loading State -->
         <div
           v-if="isLoading"
-          class="posts-loading"
+          class="posts-grid"
         >
           <article
             class="post-card"
@@ -177,11 +179,10 @@ export default defineComponent({
             class="post-card"
           >
             <div class="post-header">
-              <img
+              <Avatar
                 :src="post.author.avatar"
                 :alt="post.author.name"
-                class="post-avatar"
-              >
+              />
               <div class="post-meta">
                 <h3 class="post-author">
                   {{ post.author.name }}
@@ -215,7 +216,7 @@ export default defineComponent({
           </h3>
           <div
             v-if="isLoading"
-            class="widget-loading"
+            class="widget-content"
           >
             <Skeleton type="title" />
             <Skeleton type="desc" />
@@ -237,7 +238,7 @@ export default defineComponent({
           </h3>
           <div
             v-if="isLoading"
-            class="widget-loading"
+            class="widget-content"
           >
             <Skeleton type="desc" />
             <Skeleton type="title" />
@@ -263,7 +264,7 @@ export default defineComponent({
     <footer class="footer">
       <div
         v-if="isLoading"
-        class="footer-loading"
+        class="footer-content"
       >
         <Skeleton type="title" />
         <Skeleton type="desc" />
@@ -272,7 +273,7 @@ export default defineComponent({
         v-else
         class="footer-content"
       >
-        <p>&copy; 2024 Blog của tôi. Tất cả quyền được bảo lưu.</p>
+        <p>&copy; 2025 Blog của tôi. Tất cả quyền được bảo lưu.</p>
         <nav class="footer-nav">
           <a href="/about">Giới thiệu</a>
           <a href="/contact">Liên hệ</a>
@@ -288,265 +289,235 @@ export default defineComponent({
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--size-border-radius);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-space-x-large);
+
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Header Styles */
-.header-section {
+.page-container > .header-section {
+  border-radius: var(--size-border-radius);
+  padding: var(--size-space-xx-large);
+  margin-block-end: var(--size-space-medium);
+
   background: linear-gradient(var(--color-linear-gradient));
   color: white;
-  padding: var(--size-space-xx-large);
-  border-radius: var(--size-border-radius);
-  margin-block-end: var(--size-space-medium);
 }
 
-.profile-header {
+.page-container > .header-section > .profile-header {
   display: flex;
   align-items: center;
-  gap: var(--size-border-radius);
+  gap: var(--size-space-medium);
 }
 
-.avatar, .post-avatar {
-  width: var(--size-avatar-lg);
-  height: var(--size-avatar-lg);
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.post-avatar {
-  width: var(--size-avatar-md);
-  height: var(--size-avatar-md);
-}
-
-.profile-info {
+.page-container > .header-section > .profile-header > .profile-info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-space-tiny);
 }
 
-.user-name {
-  font-size: 2rem;
-  margin: 0 0 10px 0;
-  font-weight: 700;
+.page-container > .header-section > .profile-header > .profile-info > .user-name {
+  font-size: var(--font-size-title-medium);
+  font-weight: var(--font-weight-bold);
 }
 
-.user-bio {
-  font-size: 1.1rem;
-  opacity: 0.9;
-  margin: 0;
+.page-container > .header-section > .profile-header > .profile-info > .user-bio {
+  font-size: var(--font-size-title-small);
 }
 
 /* Main Content */
-.main-content {
+.page-container > .main-content {
   display: grid;
   grid-template-columns: 1fr 300px;
-  gap: 40px;
+  gap: var(--size-space-medium);
   align-items: start;
 }
 
-.posts-section {
+.page-container > .main-content > .posts-section {
   min-width: 0;
 }
 
-.section-title {
-  font-size: 1.8rem;
-  margin-bottom: 25px;
-  color: #333;
-  border-bottom: 3px solid #667eea;
-  padding-bottom: 10px;
+.page-container > .main-content > .posts-section > .section-title {
+  border-block-end: 3px solid var(--color-blue-700);
+  padding-block-end: var(--size-space-small);
+  margin-block-end: var(--size-space-medium);
+
+  color: var(--color-gray-900);
+  font-size: var(--font-size-title-medium);
 }
 
 /* Posts */
-.posts-loading,
-.posts-grid {
+.page-container > .main-content > .posts-section > .posts-grid {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: var(--size-space-xx-large);
 }
 
-.post-card {
+.page-container > .main-content > .posts-section > .posts-grid > .post-card {
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--size-border-radius);
+  padding: var(--size-space-medium);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-space-medium);
+
   background: white;
-  border: 1px solid #e1e5e9;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  box-shadow: var(--box-shadow);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.post-card:hover {
+.page-container > .main-content > .posts-section > .posts-grid > .post-card:hover {
+  box-shadow: var(--box-shadow);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-.post-header {
+.page-container > .main-content > .posts-section > .posts-grid > .post-card > .post-header {
+  margin-block-end: var(--size-space-small);
+
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 15px;
+  gap: var(--size-space-small);
 }
 
-.post-meta {
+.page-container > .main-content > .posts-section > .posts-grid > .post-card > .post-header > .post-meta {
   flex: 1;
 }
 
-.post-author {
+.page-container > .main-content > .posts-section > .posts-grid > .post-card > .post-header > .post-meta > .post-author {
+  margin-block-end: var(--size-space-small);
+
   font-size: 0.95rem;
-  font-weight: 600;
-  margin: 0 0 4px 0;
-  color: #333;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
 }
 
-.post-date {
-  font-size: 0.85rem;
-  color: #666;
+.page-container > .main-content > .posts-section > .posts-grid > .post-card > .post-header > .post-meta > .post-date {
+  color: var(--color-gray-700);
+  font-size: var(--font-size-body-small);
 }
 
-.post-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin: 0 0 12px 0;
-  color: #333;
+.page-container > .main-content > .posts-section > .posts-grid > .post-card > .post-title {
+  margin-block-end: var(--size-space-small);
+
+  color: var(--color-gray-900);
+  font-size: var(--font-size-title-medium);
+  font-weight: var(--font-weight-semibold);
 }
 
-.post-excerpt {
-  color: #666;
+.page-container > .main-content > .posts-section > .posts-grid > .post-card > .post-excerpt {
+  margin-block-end: var(--size-space-small);
+
+  color: var(--color-gray-700);
   line-height: 1.6;
-  margin: 0 0 20px 0;
 }
 
-.post-actions {
+.page-container > .main-content > .posts-section > .posts-grid > .post-card > .post-actions {
   display: flex;
-  gap: 10px;
-}
-
-.btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-primary {
-  background: #667eea;
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #5a67d8;
-}
-
-.btn-secondary {
-  background: #f7fafc;
-  color: #4a5568;
-  border: 1px solid #e2e8f0;
-}
-
-.btn-secondary:hover {
-  background: #edf2f7;
+  gap: var(--size-space-medium);
 }
 
 /* Sidebar */
-.sidebar {
+.page-container > .main-content > .sidebar {
   position: sticky;
-  top: 20px;
 }
 
-.widget {
+.page-container > .main-content > .sidebar > .widget {
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--size-border-radius);
+
+  padding: var(--size-space-medium);
+  margin-block-end: var(--size-space-medium);
+
+  box-shadow: var(--box-shadow);
   background: white;
-  border: 1px solid #e1e5e9;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.widget-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 0 0 15px 0;
-  color: #333;
-  border-bottom: 2px solid #f1f5f9;
-  padding-bottom: 10px;
+.page-container > .main-content > .sidebar > .widget > .widget-title {
+  border-block-end: 2px solid var(--color-gray-100);
+  padding-block-end: var(--size-space-small);
+  margin-block-end: var(--size-space-small);
+
+  color: var(--color-gray-900);
+  font-size: var(--font-size-title-small);
+  font-weight: var(--font-weight-semibold);
 }
 
-.widget-loading {
+.page-container > .main-content > .sidebar > .widget > .widget-content {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--size-space-tiny);
 }
 
-.widget-content p {
-  margin: 8px 0;
-  color: #666;
+.page-container > .main-content > .sidebar > .widget > .widget-content > p {
+  margin-block: var(--size-space-small);
+
+  color: var(--color-gray-700);
 }
 
-.tag-list {
+.page-container > .main-content > .sidebar > .widget > .tag-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--size-space-tiny);
 }
 
-.tag {
-  background: #f1f5f9;
-  color: #4a5568;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
+.page-container > .main-content > .sidebar > .widget > .tag-list > .tag {
+  border-radius: var(--size-border-radius-medium);
+  padding-inline: var(--size-space-medium);
+  padding-block: var(--size-space-tiny);
+
+  background: var(--color-gray-200);
+  color: var(--color-neutral-500);
+  font-size: var(--font-size-body-small);
+  font-weight: var(--font-weight-medium);
+
+  cursor: pointer;
+}
+
+.page-container > .main-content > .sidebar > .widget > .tag-list > .tag:hover {
+  background-color: var(--color-blue-700);
+  color: var(--color-neutral-50);
 }
 
 /* Footer */
-.footer {
-  margin-top: 50px;
-  padding: 30px;
-  background: #f8fafc;
-  border-radius: 12px;
+.page-container > .footer {
+  border-radius: var(--size-border-radius);
+  padding: var(--size-space-x-large);
+
+  background-color: white;
   text-align: center;
 }
 
-.footer-loading {
+.page-container > .footer > .footer-content {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--size-space-small);
   align-items: center;
 }
 
-.footer-content p {
-  margin: 0 0 15px 0;
-  color: #666;
+.page-container > .footer > .footer-content > p {
+  margin-block-end: var(--size-space-small);
+
+  color: var(--color-gray-700);
 }
 
-.footer-nav {
+.page-container > .footer > .footer-content > .footer-nav {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: var(--size-space-medium);
 }
 
-.footer-nav a {
-  color: #667eea;
-  text-decoration: none;
-  font-weight: 500;
+.page-container > .footer > .footer-content > .footer-nav > a {
+  color: var(--color-blue-500);
+  font-weight: var(--font-weight-medium);
 }
 
-.footer-nav a:hover {
+.page-container > .footer > .footer-content > .footer-nav > a:hover {
   text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .main-content {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .profile-header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .user-name {
-    font-size: 1.5rem;
-  }
 }
 </style>
