@@ -57,7 +57,7 @@ export default defineComponent({
     <div class="unit-error">
       <div class="section">
         <img
-          src="/error.webp"
+          src="/page-not-found.webp"
           alt="error"
           class="error"
         >
