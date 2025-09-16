@@ -318,7 +318,15 @@
 
   /** Color linear gradient */
   --color-linear-gradient: 90deg, var(--color-blue-700) 0%, var(--color-purple-700) 43%, var(--color-rose-700) 100%;
+  --color-linear-gradient-loading: linear-gradient(
+    120deg,
+    var(--color-gray-300) 30%,
+    var(--color-gray-200) 38%,
+    var(--color-gray-200) 40%,
+    var(--color-gray-300) 48%
+  );
   --avatar-linear-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
   /** Scrollbar */
   --scrollbar-width: 0.3125rem;
   --scrollbar-track: inherit;
