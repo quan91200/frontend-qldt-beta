@@ -4,12 +4,14 @@ import {
 } from 'vue'
 
 import EmptyState from '~/components/Table/EmptyState.vue'
+import SkeletonTable from '~/components/Table/SkeletonTable.vue'
 
 export default defineComponent({
   name: "Table",
 
   components: {
     EmptyState,
+    SkeletonTable,
   },
 
   props: {
@@ -96,7 +98,10 @@ export default defineComponent({
             class="cell loading"
           >
             <slot name="isLoading">
-              Loading
+              <SkeletonTable
+                :columns="props.columns"
+                :rows="3"
+              />
             </slot>
           </td>
         </tr>
