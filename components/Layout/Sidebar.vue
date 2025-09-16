@@ -57,6 +57,10 @@ export default defineComponent({
         label: 'Tab',
         href: '/DemoTab'
       },
+      {
+        label: 'Table',
+        href: '/DemoTable'
+      },
     ]
 
     return {
