@@ -17,7 +17,7 @@ export default defineComponent({
     }
   },
 
-  setup() {
+  setup(props) {
     return {
       props,
     }
@@ -36,7 +36,7 @@ export default defineComponent({
 .skeleton-block {
   --skeleton-title: 1.2rem;
   --skeleton-desc: 3rem;
-  --skeleton-avatar: 2rem;
+  --skeleton-avatar: 4rem;
   --skeleton-speed: 5s;
 
   margin-block: var(--size-space-tiny);
@@ -62,6 +62,7 @@ export default defineComponent({
 .skeleton-block.avatar {
   border-radius: var(--size-border-radius-full);
   height: var(--skeleton-avatar);
+  width: var(--skeleton-avatar);
 }
 
 @keyframes skeleton-pulse {
