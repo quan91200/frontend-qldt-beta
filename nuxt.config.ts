@@ -34,5 +34,6 @@ export default defineNuxtConfig({
     '~/assets/css/variables.css',
     '~/assets/css/default.css',
     '~/assets/css/fonts.css',
+    '~/assets/css/keyframes.css',
   ]
 })
