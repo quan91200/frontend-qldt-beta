@@ -64,10 +64,4 @@ export default defineComponent({
   height: var(--skeleton-avatar);
   width: var(--skeleton-avatar);
 }
-
-@keyframes skeleton-pulse {
-  100% {
-    background-position: -100% 0;
-  }
-}
 </style>

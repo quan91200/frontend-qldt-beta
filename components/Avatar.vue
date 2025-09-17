@@ -207,15 +207,4 @@ export default defineComponent({
 .avatar .avatar-text {
   animation: fadeIn 0.3s ease-in-out;
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 </style>

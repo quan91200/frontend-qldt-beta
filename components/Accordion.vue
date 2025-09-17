@@ -163,16 +163,4 @@ export default defineComponent({
 
   animation: slide-down 250ms ease;
 }
-
-/* Animation for open/close transition */
-@keyframes slide-down {
-  from {
-    max-height: 0;
-    opacity: 0;
-  }
-  to {
-    max-height: 60rem;
-    opacity: 1;
-  }
-}
 </style>
