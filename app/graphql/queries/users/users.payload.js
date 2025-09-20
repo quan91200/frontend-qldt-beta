@@ -6,7 +6,7 @@ import {
  * Payload.
  */
 const USERS = gql`
-  query {
+  query getUsers {
     users {
       id
       email
