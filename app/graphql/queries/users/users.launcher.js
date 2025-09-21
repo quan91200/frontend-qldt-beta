@@ -12,7 +12,7 @@ import {
  *   loading: import('vue').Ref<Boolean>
  * }}
  */
-export const useAllUsersLauncher = () => {
+export const useUsersLauncher = () => {
   const {
     $apollo,
   } = useNuxtApp()
