@@ -1,11 +1,3 @@
-import {
-  HALF_DAY_HOURS,
-  MONTH_NAME,
-} from '~/app/constants.js'
-
-const MAX_LENGTH = 2
-const FILL_STRING = '0'
-
 /**
  * BaseAppContext
  */
@@ -38,53 +30,34 @@ export default class BaseAppContext {
     value,
     format = 'MM-DD-YYYY',
   }) {
-    if (!value) {
-      return ''
-    }
-
+    if (!value) return ''
     const date = new Date(value)
 
-    const year = date.getFullYear()
-
-    const monthValue = date.getMonth() + 1
-    const month = monthValue.toString()
-      .padStart(MAX_LENGTH, FILL_STRING)
-
-    const dayValue = date.getDate()
-    const day = dayValue.toString()
-      .padStart(MAX_LENGTH, FILL_STRING)
-
     if (format === 'MM-DD-YYYY') {
-      return `${month}-${day}-${year}`
+      return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }).format(date)
     }
 
     if (format === 'YYYY-MM-DD') {
-      return `${year}-${month}-${day}`
+      return new Intl.DateTimeFormat('en-CA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }).format(date)
     }
 
     if (format === 'DD MMM, YYYY hh:mm A') {
-      const hours = date.getHours()
-      const minutes = date.getMinutes()
-        .toString()
-        .padStart(MAX_LENGTH, FILL_STRING)
-
-      const period = hours >= HALF_DAY_HOURS
-        ? 'PM'
-        : 'AM'
-
-      const hourFormat = hours % HALF_DAY_HOURS
-      const isMidnightOrNoon = hourFormat === 0
-      const formattedHourValue = isMidnightOrNoon
-        ? HALF_DAY_HOURS
-        : hourFormat
-
-      const formattedHours = formattedHourValue
-        .toString()
-        .padStart(MAX_LENGTH, FILL_STRING)
-
-      const monthName = MONTH_NAME[date.getMonth()]
-
-      return `${day} ${monthName}, ${year} ${formattedHours}:${minutes} ${period}`
+      return new Intl.DateTimeFormat('en-US', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      }).format(date)
     }
 
     return date.toLocaleDateString()
