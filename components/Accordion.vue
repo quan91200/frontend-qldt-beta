@@ -7,7 +7,7 @@ import {
   Icon,
 } from '#components'
 
-import AccordionContext from '~/app/contexts/AccordionContext'
+import AccordionContext from '~/app/contexts/components/AccordionContext'
 
 export default defineComponent({
   name: "Accordion",

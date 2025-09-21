@@ -4,7 +4,7 @@ import {
   ref,
 } from "vue"
 
-import AvatarContext from "~/app/contexts/AvatarContext"
+import AvatarContext from "~/app/contexts/components/AvatarContext"
 
 export default defineComponent({
   name: "AvatarComponent",
