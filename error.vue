@@ -10,7 +10,7 @@ import {
 
 import NuxtLayout from '#app/components/nuxt-layout.js'
 
-import ErrorContext from './app/contexts/ErrorContext'
+import ErrorContext from './app/contexts/components/ErrorContext'
 
 import Button from '~/components/Button.vue'
 
