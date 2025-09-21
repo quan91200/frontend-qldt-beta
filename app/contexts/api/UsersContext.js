@@ -11,11 +11,11 @@ import {
 /**
  * Context class for User component.
  */
-export default class UserContex extends BaseAppContext {
+export default class UsersContext extends BaseAppContext {
   /**
    * Constructor.
    *
-   * @param {UserContextParams} params
+   * @param {UsersContextParams} params
    */
   constructor({
     props,
@@ -32,8 +32,8 @@ export default class UserContex extends BaseAppContext {
   /**
    * Factory method.
    *
-   * @template {X extends typeof UserContext ? X : never} T,X
-   * @param {UserContextFactoryparams} params
+   * @template {X extends typeof UsersContext ? X : never} T,X
+   * @param {UsersContextFactoryParams} params
    * @returns {InstanceType<T>}
    * @this {T}
    */
@@ -50,7 +50,7 @@ export default class UserContex extends BaseAppContext {
   /**
    * Setup component.
    *
-   * @template {X extends UserContext ? X : never} T, X
+   * @template {X extends UsersContext ? X : never} T, X
    * @returns {T}
    * @this {T}
    */
@@ -84,9 +84,9 @@ export default class UserContex extends BaseAppContext {
 /**
  * @typedef {{
  *   users: import('vue').Ref<GraphQLTypes.Users>
- * }} UserContextParams
+ * }} UsersContextParams
  */
 
 /**
- * @typedef {UserContextParams} UserContextFactoryparams
+ * @typedef {UsersContextParams} UsersContextFactoryParams
  */
