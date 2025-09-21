@@ -5,7 +5,7 @@ import {
 import BaseAppContext from '~/app/contexts/Base/BaseAppContext.js'
 
 import {
-  UsersLauncher,
+  useUsersLauncher,
 } from '~/app/graphql/queries/users/users.launcher.js'
 
 /**
@@ -26,7 +26,7 @@ export default class UsersContext extends BaseAppContext {
 
     this.props = props
 
-    this.launcher = UsersLauncher()
+    this.launcher = useUsersLauncher()
   }
 
   /**

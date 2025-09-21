@@ -21,9 +21,9 @@ export default defineComponent({
         href: '/',
       },
       {
-        label: 'Demo',
+        label: 'Components',
         separator: true,
-        iconName: 'ph:monitor',
+        iconName: 'ph:puzzle-piece',
       },
       {
         label: 'Accordion',
@@ -60,6 +60,15 @@ export default defineComponent({
       {
         label: 'Table',
         href: '/DemoTable'
+      },
+      {
+        label: 'API',
+        separator: true,
+        iconName: 'ph:dropbox-logo',
+      },
+      {
+        label: 'Users',
+        href: '/DemoUsers',
       },
     ]
 
