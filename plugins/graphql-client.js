@@ -17,12 +17,22 @@ export default defineNuxtPlugin(() => {
   const authLink = new ApolloLink((operation, forward) => {
     if (process.client) {
       const token = localStorage.getItem('token')
-      operation.setContext(({ headers = {} }) => ({
-        headers: {
+
+      operation.setContext(({
+        headers = {},
+      }) => {
+        const newHeaders = {
           ...headers,
-          Authorization: token ? `Bearer ${token}` : '',
-        },
-      }))
+        }
+
+        if (token) {
+          newHeaders.Authorization = `Bearer ${token}`
+        }
+
+        return {
+          headers: newHeaders,
+        }
+      })
     }
     return forward(operation)
   })
